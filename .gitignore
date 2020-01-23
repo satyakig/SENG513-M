@@ -1,0 +1,44 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# ide
+.idea/
+.vscode/
+mine/
+
+# dependencies
+**/node_modules/**
+/.pnp
+.pnp.js
+*.deb
+
+# zip
+*.tgz
+*.zip
+
+# testing
+/coverage
+
+# production
+build/
+functions/lib/
+.firebase/
+
+# misc
+.DS_Store
+.eslintcache
+
+# logs
+logs
+*.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# environment
+*.env.*
+*.yaml
+
+# except
+!**/cloud/*
+
+

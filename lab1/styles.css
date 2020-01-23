@@ -1,0 +1,118 @@
+/*background: #1b1f3a*/
+/*one: #53354a*/
+/*two: #a64942*/
+/*highlight: #ff7844*/
+/*text: #eeeeee*/
+/*https://colorhunt.co/palette/43636*/
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 300;
+    margin: 0;
+    color: #eeeeee;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #ff7844;
+    font-weight: 500;
+}
+
+a, p {
+    color: #eeeeee;
+}
+
+span:active, a:hover {
+    color: #ff7844;
+}
+
+#menu {
+    background-color: #1b1f3a;
+}
+
+#home {
+    background-color: #53354a;
+}
+
+#about {
+    background-color: #a64942;
+}
+
+#skills {
+    background-color: #53354a;
+}
+
+#experience {
+    background-color: #a64942;
+}
+
+.page {
+    position: absolute;
+    width: calc(100% - 16px);
+    height: calc(100% - 16px);
+    margin: 8px;
+    box-shadow: 0 20px 35px #ff7844, 0 15px 15px #ff7844;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+aside {
+    flex-basis: 25%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.logo {
+    text-align: center;
+    margin: 30px 0;
+    width: auto;
+    height: auto;
+}
+
+.logo img {
+    width: auto;
+    height: auto;
+}
+
+nav {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 60%;
+}
+
+.page-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    font-weight: 400;
+    text-align: center;
+    width: calc(100% - 6px);
+    height: 55px;
+    margin: 3px;
+    text-transform: uppercase;
+    transition-duration: .5s;
+    border: 1px solid transparent;
+}
+
+.page-links:hover {
+    border-color: #ff7844;
+    border-radius: 15px;
+}
+
+#page-link-selected {
+    border-color: #ff7844;
+    border-radius: 15px;
+    color: #ff7844;
+    text-decoration: none;
+}
+
+article {
+    flex-basis: 75%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

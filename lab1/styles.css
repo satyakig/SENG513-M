@@ -1,16 +1,11 @@
-/*background: #222831*/
-/*one: #2d4059*/
-/*highlight: #ff5722*/
-/*text: #eeeeee*/
-/*https://colorhunt.co/palette/21781*/
-
 /*background: #303841*/
 /*one: #3a4750*/
 /*highlight: #f6c90e*/
 /*text: #eeeeee*/
 /*https://colorhunt.co/palette/18378*/
 
-
+/*Global styles*/
+/*Colours from https://colorhunt.co/palette/18378*/
 body {
     font-family: 'Quicksand', sans-serif;
     font-weight: 300;
@@ -22,38 +17,39 @@ body {
 *::-webkit-scrollbar {
     width: 6px;
     height: 6px;
-    cursor: pointer;
 }
 
 *::-webkit-scrollbar-button {
     width: 0;
     height: 0;
-  }
+}
 
 *::-webkit-scrollbar-thumb {
     border-radius: 100px;
-    background-color: #b5b5b5;
+    background-color: #f6c90e;
 }
 
 *::-webkit-scrollbar-track {
-    border-radius: 0;
-    background-color: #f1f1f1;
+    border-radius: 50px;
+    background-color: #3a4750;
 }
 
 *::-webkit-scrollbar-corner {
     background: transparent;
 }
 
+/*Common element styles*/
 h1, h2, h3, h4, h5, h6 {
-    color: #eeeeee;
+    font-family: 'Alegreya', serif;
     font-weight: 500;
+    font-style: italic;
 }
 
-a, p {
-    color: #eeeeee;
+a, p, h1, h2, h3, h4, h5, h6, span, li {
+    color: inherit;
 }
 
-p, span, h1, h2, h3, h4, h5, h6 {
+p, span, h1, h2, h3, h4, h5, h6, li {
     user-select: none;
 }
 
@@ -61,53 +57,7 @@ span:active, a:hover {
     color: #f6c90e;
 }
 
-
-
-
-#home-img {
-    background-image: url(home.jpg);
-    background-position: center center;
-    background-repeat:  no-repeat;
-    background-attachment: fixed;
-    background-size:  cover;
-    filter: grayscale(100%) opacity(0.35) saturate(1.1);
-}
-
-#about-img {
-    background: url(https://images.unsplash.com/photo-1485635153370-c97bb55602c4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80) no-repeat fixed center center;
-}
-
-#skills-img {
-    background: url(https://images.unsplash.com/photo-1485635153370-c97bb55602c4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80) no-repeat fixed center center;
-}
-
-#experience-img {
-    background: url(https://images.unsplash.com/photo-1485635153370-c97bb55602c4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80) no-repeat fixed center center;
-}
-
-
-
-
-#home {
-    margin-top: 42%;
-    margin-left: 15%;
-    text-align: left;
-    line-height: 40px;
-    letter-spacing: 3px;
-}
-
-#about {
-}
-
-#skills {
-}
-
-#experience {
-}
-
-
-
-
+/*Top level div for each page*/
 .page {
     position: absolute;
     width: calc(100% - 18px);
@@ -123,9 +73,7 @@ span:active, a:hover {
     border-color: #303841 #3a4750 #303841 #303841;
 }
 
-
-
-
+/*Common side navigation bar for each page*/
 aside {
     background-color: #303841;
     flex-basis: 20%;
@@ -134,10 +82,10 @@ aside {
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
-    border: 1px solid;
-    border-color: transparent #303841 transparent transparent;
-    border-radius: 1px 0 0 1px;
     letter-spacing: 2px;
+    border: 1px solid;
+    border-color: transparent #f6c90e transparent transparent;
+    border-radius: 5px 0 0 5px;
 }
 
 .logo {
@@ -190,44 +138,89 @@ nav {
 }
 
 
-
-
+/*Content elements and divs for each page*/
 article {
     flex-basis: 80%;
     flex-grow: 1;
     height: 100%;
-    border: 1px solid transparent;
-    border-radius: 0 1px 1px 0;
+    max-height: 100%;
     z-index: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    background-color: #303841;
+    overflow: hidden;
+    background-color: #3a4750;
+    border: 1px solid transparent;
+    border-radius: 0 5px 5px 0;
 }
 
+/*Background container div and images for each page*/
 .background {
     z-index: 1;
     height: calc(100% - 2px);
     width: calc(100% - 2px);
     overflow: hidden;
     border: 1px solid transparent;
-    border-radius: 5px;
+    border-radius: 0 5px 5px 0;
 }
 
+#home-img {
+    background-image: url(home.jpg);
+    filter: grayscale(100%) opacity(0.35) saturate(1.1);
+}
+
+#about-img {
+    background-image: url(about.jpg);
+    filter: grayscale(100%) opacity(0.25) saturate(1.1);
+}
+
+#skills-img {
+    background-image: url(skills.jpg);
+    filter: grayscale(100%) opacity(0.15) saturate(1.1);
+}
+
+#experience-img {
+    background-image: url(experience.jpg);
+    filter: grayscale(100%) opacity(0.35) saturate(1.1);
+}
+
+#home-img, #about-img, #skills-img, #experience-img {
+    background-position: center center;
+    background-repeat:  no-repeat;
+    background-attachment: fixed;
+    background-size:  cover;
+}
+
+
+/*Foreground container div overlaid on top of each background image div*/
 .content {
     position: absolute;
     z-index: 2;
-    border: 1px solid transparent;
-    border-radius: 5px;
     max-width: calc(100% - 195px);
     min-width: calc(100% - 265px);
     height: calc(100% - 2px);
+    max-height: calc(100% - 2px);
     width: calc(80% - 2px);
     top: 0;
     right: 0;
+    overflow-y: auto;
 }
 
+/*Common content styles*/
+.page-header {
+    text-align: center;
+    font-size: 60px;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    text-decoration: underline;
+    text-decoration-color: #f6c90e;
+}
 
-
+/*Styles for the index/home page*/
+#home {
+    margin-top: 33%;
+    margin-left: 15%;
+    text-align: left;
+    line-height: 40px;
+    letter-spacing: 3px;
+}
 
 .name {
     line-height: 50px;
@@ -239,11 +232,57 @@ article {
 }
 
 .title {
-    border-bottom: 1px solid #eeeeee;
-    border-top: 1px solid #eeeeee;
+    border-bottom: 2px solid #f6c90e;
+    border-top: 2px solid #f6c90e;
     font-weight: 500;
     padding: 15px 0;
     letter-spacing: 1px;
     text-transform: uppercase;
     font-size: 25px;
+}
+
+/*Common styles for the other pages*/
+#about, #skills, #experience {
+    margin-top: 5%;
+}
+
+.body {
+    text-align: justify;
+    margin: 5% 25%;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.list {
+    display: table;
+    margin: 5% auto 0 auto;
+    font-size: 22px;
+    font-weight: 400;
+}
+
+.list span {
+    margin-left: 10px;
+}
+
+.list li {
+    margin-bottom: 20px;
+}
+
+.list li:nth-child(4n-7) {
+    list-style-image: url(rocket.svg);
+}
+
+.list li:nth-child(4n-6) {
+    list-style-image: url(star.svg);
+}
+
+.list li:nth-child(4n-5) {
+    list-style-image: url(check.svg);
+}
+
+.list li:nth-child(4n-4) {
+    list-style-image: url(hat.svg);
+}
+
+#experience {
 }

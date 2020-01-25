@@ -1,8 +1,7 @@
 /*background: #303841*/
-/*one: #3a4750*/
+/*primary: #3a4750*/
 /*highlight: #f6c90e*/
 /*text: #eeeeee*/
-/*https://colorhunt.co/palette/18378*/
 
 /*Global styles*/
 /*Colours from https://colorhunt.co/palette/18378*/
@@ -45,11 +44,11 @@ h1, h2, h3, h4, h5, h6 {
     font-style: italic;
 }
 
-a, p, h1, h2, h3, h4, h5, h6, span, li {
+a, p, h1, h2, h3, h4, h5, h6, span, li, th, td {
     color: inherit;
 }
 
-p, span, h1, h2, h3, h4, h5, h6, li {
+p, span, h1, h2, h3, h4, h5, h6, li, th, td {
     user-select: none;
 }
 
@@ -121,7 +120,7 @@ nav {
     height: 55px;
     margin: 3px;
     text-transform: uppercase;
-    transition-duration: .35s;
+    transition-duration: 0.35s;
     border: 1px solid transparent;
 }
 
@@ -176,12 +175,12 @@ article {
     filter: grayscale(100%) opacity(0.15) saturate(1.1);
 }
 
-#experience-img {
-    background-image: url(experience.jpg);
+#books-img {
+    background-image: url(books.jpg);
     filter: grayscale(100%) opacity(0.35) saturate(1.1);
 }
 
-#home-img, #about-img, #skills-img, #experience-img {
+#home-img, #about-img, #skills-img, #books-img {
     background-position: center center;
     background-repeat:  no-repeat;
     background-attachment: fixed;
@@ -195,9 +194,9 @@ article {
     z-index: 2;
     max-width: calc(100% - 195px);
     min-width: calc(100% - 265px);
+    width: calc(80% - 2px);
     height: calc(100% - 2px);
     max-height: calc(100% - 2px);
-    width: calc(80% - 2px);
     top: 0;
     right: 0;
     overflow-y: auto;
@@ -242,10 +241,11 @@ article {
 }
 
 /*Common styles for the other pages*/
-#about, #skills, #experience {
+#about, #skills, #books {
     margin-top: 5%;
 }
 
+/*About page body*/
 .body {
     text-align: justify;
     margin: 5% 25%;
@@ -253,6 +253,7 @@ article {
     font-weight: 400;
 }
 
+/*Skills page list*/
 .list {
     display: table;
     margin: 5% auto 0 auto;
@@ -284,5 +285,68 @@ article {
     list-style-image: url(hat.svg);
 }
 
-#experience {
+/*Books page table*/
+table {
+    border-spacing: 0;
+    border-collapse: separate;
+    border: 0.5px solid #eeeeee;
+    border-radius: 10px;
+    min-height: 80%;
+    height: 80%;
+    width: 80%;
+    margin: 0 auto 3% auto;
+}
+
+td, th {
+    height: 40px;
+    width: auto;
+    text-align: left;
+    padding: 2px 5px 2px 10px;
+    transition: 0.3s;
+    border: 0.5px solid #eeeeee;
+}
+
+th {
+    background-color: rgba(48, 56, 65, 0.9);
+    font-family: 'Alegreya', serif;
+    font-size: 25px;
+    font-weight: 500;
+    font-style: italic;
+    letter-spacing: 1px;
+}
+
+th:first-child {
+    border-radius: 10px 0 0 0;
+}
+
+th:last-child {
+    border-radius: 0 10px 0 0;
+}
+
+td {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+tr:nth-child(even) td {
+    background-color: rgba(58, 71, 80, 0.6);
+}
+
+tr:nth-child(odd) td {
+}
+
+tbody tr:last-child td:first-child {
+    border-radius: 0 0 0 10px;
+}
+
+tbody tr:last-child td:last-child {
+    border-radius: 0 0 10px 0;
+}
+
+tr td:hover {
+    background: #303841;
+    color: #f6c90e;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 20px;
 }

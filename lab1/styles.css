@@ -57,7 +57,7 @@ span:active, a:hover {
 }
 
 /*Top level div for each page*/
-.page {
+main {
     position: absolute;
     width: calc(100% - 18px);
     height: calc(100% - 18px);
@@ -77,7 +77,6 @@ aside {
     background-color: #303841;
     flex-basis: 20%;
     max-width: 260px;
-    min-width: 190px;
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -87,17 +86,23 @@ aside {
     border-radius: 5px 0 0 5px;
 }
 
-.logo {
+figure {
     text-align: center;
     margin: 30px 0;
     width: auto;
     height: auto;
 }
 
-.logo img {
+figure img {
     width: auto;
     height: auto;
     filter: invert(0.7);
+}
+
+@media screen and (max-width: 710px) {
+  figure {
+      display: none;
+  }
 }
 
 nav {
@@ -189,10 +194,9 @@ article {
 
 
 /*Foreground container div overlaid on top of each background image div*/
-.content {
+section {
     position: absolute;
     z-index: 2;
-    max-width: calc(100% - 195px);
     min-width: calc(100% - 265px);
     width: calc(80% - 2px);
     height: calc(100% - 2px);
@@ -248,7 +252,7 @@ article {
 /*About page body*/
 .body {
     text-align: justify;
-    margin: 5% 25%;
+    margin: 5% 20%;
     font-size: 22px;
     font-weight: 400;
 }

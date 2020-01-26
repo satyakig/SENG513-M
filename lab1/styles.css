@@ -30,7 +30,7 @@ body {
 
 *::-webkit-scrollbar-track {
     border-radius: 50px;
-    background-color: #3a4750;
+    background-color: #303841;
 }
 
 *::-webkit-scrollbar-corner {
@@ -347,6 +347,7 @@ tr td:hover {
     background: #303841;
     color: #f6c90e;
     font-weight: 500;
-    cursor: pointer;
+    user-select: auto;
+    cursor: text;
     font-size: 20px;
 }

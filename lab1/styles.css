@@ -218,11 +218,8 @@ article {
 
 /*Styles for the index/home page*/
 #home {
-    position: relative;
-    width: fit-content;
-    height: auto;
-    bottom: -35%;
-    left: 10%;
+    margin-top: 30%;
+    margin-left: 10%;
     line-height: 2.5em;
     letter-spacing: 3px;
 }

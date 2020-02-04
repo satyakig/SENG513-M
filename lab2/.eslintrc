@@ -1,0 +1,191 @@
+{
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "google",
+    "prettier",
+    "react-app",
+    "prettier/@typescript-eslint",
+    "prettier/react"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "globals": {
+    "fetchMock": "writable"
+  },
+  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks", "import", "jsdoc"],
+  "rules": {
+    "prettier/prettier": "error",
+    "no-useless-constructor": "off",
+    "no-console": "error",
+    "no-confusing-arrow": ["error", { "allowParens": false }],
+    "no-mixed-operators": [
+      "error",
+      {
+        "groups": [
+          ["&", "|", "^", "~", "<<", ">>", ">>>"],
+          ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
+          ["&&", "||"],
+          ["in", "instanceof"]
+        ],
+        "allowSamePrecedence": true
+      }
+    ],
+    "arrow-parens": ["error", "always"],
+    "arrow-body-style": ["error", "always"],
+    "no-var": "error",
+    "prefer-const": "error",
+    "no-restricted-globals": ["off", "isNaN", "isFinite"],
+    "object-curly-newline": ["error", { "consistent": true }],
+    "curly": ["error", "all"],
+    "no-underscore-dangle": ["error", { "allowAfterThis": true, "allowAfterSuper": true }],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "prefer-template": "error",
+    "no-useless-concat": "error",
+    "spaced-comment": [
+      "error",
+      "always",
+      {
+        "block": {
+          "balanced": true
+        },
+        "markers": ["/"]
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": [
+      "error",
+      {
+        "allowExpressions": true
+      }
+    ],
+    "import/first": ["error", "absolute-first"],
+    "import/newline-after-import": "error",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": false,
+        "optionalDependencies": false,
+        "peerDependencies": false
+      }
+    ],
+    "import/no-duplicates": "error",
+    "import/no-cycle": "error",
+    "quotes": ["error", "single", { "avoidEscape": true }],
+    "import/no-useless-path-segments": "error",
+    "no-lonely-if": "error",
+    "no-unused-expressions": "error",
+    "no-shadow": "error",
+    "no-param-reassign": "error",
+    "camelcase": ["error"],
+    "no-dupe-args": "error",
+    "no-duplicate-case": "error",
+    "no-fallthrough": "error",
+    "no-await-in-loop": "error",
+    "no-use-before-define": "error",
+    "no-multiple-empty-lines": "error",
+    "no-nested-ternary": "error",
+    "sort-imports": [
+      "error",
+      {
+        "ignoreDeclarationSort": true,
+        "memberSyntaxSortOrder": ["none", "single", "multiple", "all"]
+      }
+    ],
+    "new-cap": "error",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": "return" },
+      { "blankLine": "always", "prev": "*", "next": "class" },
+      { "blankLine": "always", "prev": "*", "next": "block" },
+      { "blankLine": "always", "prev": "*", "next": "block-like" },
+      { "blankLine": "always", "prev": "*", "next": "try" },
+      { "blankLine": "always", "prev": "*", "next": "while" },
+      { "blankLine": "always", "prev": "*", "next": "for" },
+      { "blankLine": "always", "prev": "*", "next": "if" },
+      { "blankLine": "always", "prev": "*", "next": "function" },
+      { "blankLine": "always", "prev": "*", "next": "multiline-block-like" },
+      { "blankLine": "always", "prev": "export", "next": "export" }
+    ],
+    "@typescript-eslint/no-angle-bracket-type-assertion": "off",
+    "@typescript-eslint/no-inferrable-types": "off",
+    "require-jsdoc": "off",
+    "valid-jsdoc": "off",
+    "complexity": ["error", { "max": 10 }],
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-empty-function": "off",
+    "jsdoc/check-alignment": 2,
+    "jsdoc/check-examples": 0,
+    "jsdoc/check-indentation": 2,
+    "jsdoc/check-param-names": 2,
+    "jsdoc/check-syntax": 2,
+    "jsdoc/check-tag-names": 2,
+    "jsdoc/check-types": 2,
+    "jsdoc/implements-on-classes": 2,
+    "jsdoc/match-description": ["error", { "matchDescription": "^([A-Z]|[`\\d_])[\\s\\S]*" }],
+    "jsdoc/newline-after-description": 0,
+    "jsdoc/no-types": 0,
+    "jsdoc/no-undefined-types": 2,
+    "jsdoc/require-description": 0,
+    "jsdoc/require-description-complete-sentence": 0,
+    "jsdoc/require-example": 0,
+    "jsdoc/require-hyphen-before-param-description": 0,
+    "jsdoc/require-jsdoc": 1,
+    "jsdoc/require-param": 2,
+    "jsdoc/require-param-description": 0,
+    "jsdoc/require-param-name": 2,
+    "jsdoc/require-param-type": 0,
+    "jsdoc/require-returns": 2,
+    "jsdoc/require-returns-check": 2,
+    "jsdoc/require-returns-description": 2,
+    "jsdoc/require-returns-type": 0,
+    "jsdoc/valid-types": 2
+  },
+  "overrides": [
+    {
+      "files": ["*.d.ts"],
+      "rules": {
+        "require-jsdoc": "off",
+        "valid-jsdoc": "off",
+        "jsdoc/require-jsdoc": 0,
+        "@typescript-eslint/explicit-member-accessibility": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-empty-interface": "off",
+        "@typescript-eslint/prefer-interface": "off"
+      }
+    },
+    {
+      "files": ["src/serviceWorker.js"],
+      "rules": {
+        "require-jsdoc": "off",
+        "valid-jsdoc": "off",
+        "jsdoc/require-jsdoc": 0,
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/ban-ts-ignore": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "import/no-extraneous-dependencies": [
+          "error",
+          {
+            "optionalDependencies": false
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.css", "*.scss", "*.less"],
+      "rules": {
+        "require-jsdoc": "off",
+        "valid-jsdoc": "off",
+        "jsdoc/require-jsdoc": 0,
+        "arrow-parens": ["off", "always"],
+        "arrow-body-style": ["off", "always"]
+      }
+    }
+  ],
+  "settings": {
+    "jsdoc": {
+      "mode": "typescript"
+    }
+  }
+}

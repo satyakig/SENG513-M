@@ -1,0 +1,94 @@
+{
+  "name": "seng513-lab2",
+  "description": "Assignment 2 for SENG 513 Winter 2020",
+  "contributors": [
+    {
+      "name": "Satyaki Ghosh",
+      "email": "ghoss@ucalgary.ca"
+    }
+  ],
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=12.13",
+    "npm": ">=6.12"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "pre-commit": "lint:staged",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --cache src --ext .ts --ext .tsx --ext .js --ext .jsx",
+      "git add"
+    ],
+    "*.*{css}": [
+      "stylelint \"src/**/*.*css\"",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "format": "npm run lint:js -- --fix",
+    "lint:staged": "lint-staged",
+    "lint:js": "eslint --cache src --ext .ts --ext .tsx --ext .js --ext .jsx",
+    "lint:styled": "stylelint \"src/**/*.*css\"",
+    "lint": "npm run lint:js && npm run lint:styled"
+  },
+  "dependencies": {
+    "bootstrap": "4.4.1",
+    "core-js": "3.6.4",
+    "math-expression-evaluator": "1.2.22",
+    "react": "16.12.0",
+    "react-app-polyfill": "1.0.6",
+    "react-bootstrap": "1.0.0-beta.16",
+    "react-dom": "16.12.0",
+    "react-redux": "7.1.3",
+    "react-router-dom": "5.1.2",
+    "react-scripts": "3.3.1",
+    "redux": "4.0.5",
+    "redux-logger": "3.0.6",
+    "redux-thunk": "2.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "13.7.0",
+    "@types/react": "16.9.19",
+    "@types/react-dom": "16.9.5",
+    "@types/react-redux": "7.1.7",
+    "@types/react-router-dom": "5.1.3",
+    "@types/redux-logger": "3.0.7",
+    "@types/webpack-env": "1.15.1",
+    "@typescript-eslint/eslint-plugin": "2.19.0",
+    "@typescript-eslint/parser": "2.19.0",
+    "eslint-config-google": "0.14.0",
+    "eslint-config-prettier": "6.10.0",
+    "eslint-config-react-app": "5.2.0",
+    "eslint-loader": "3.0.3",
+    "eslint-plugin-jsdoc": "21.0.0",
+    "eslint-plugin-prettier": "3.1.2",
+    "eslint-plugin-react": "7.18.3",
+    "eslint-plugin-react-hooks": "2.3.0",
+    "husky": "4.2.1",
+    "lint-staged": "10.0.7",
+    "node-sass": "4.13.1",
+    "pre-commit": "1.2.2",
+    "prettier": "1.19.1",
+    "stylelint": "13.0.0",
+    "stylelint-config-recommended-scss": "4.2.0",
+    "stylelint-scss": "3.14.2",
+    "typescript": "3.7.5"
+  }
+}

@@ -12,7 +12,6 @@ import {
   PLUS,
   ROWS,
   LEFT_BRACKET,
-  RIGHT_BRACKET,
 } from 'CalcValue';
 import { CalcRow, VerticalOrientation } from '../CalcRow/CalcRow';
 import './App.scss';
@@ -34,20 +33,21 @@ const App = (): JSX.Element => {
         setCurrent(current.slice(0, -1));
         break;
       case EQUAL.value:
-        setLastExp(current);
-        setCurrent('');
+        if (current.length > 0) {
+          setLastExp(current);
+          setCurrent('');
+        }
         break;
       case DIVIDE.value:
       case MULTIPLY.value:
       case PLUS.value:
       case MINUS.value:
-        setCurrent(`${current} ${val} `);
-        break;
       case LEFT_BRACKET.value:
-        setCurrent(`${current} ${val}`);
-        break;
-      case RIGHT_BRACKET.value:
-        setCurrent(`${current}${val} `);
+        if (current.length === 0 && lastExp.length > 0) {
+          setCurrent(`${lastVal}${val}`);
+        } else {
+          setCurrent(`${current}${val}`);
+        }
         break;
       default:
         setCurrent(`${current}${val}`);

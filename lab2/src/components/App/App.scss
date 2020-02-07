@@ -1,50 +1,68 @@
+@import '../../Variables.scss';
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: 'Roboto', 'Oxygen', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  background: $dark-black;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+main {
+  width: 100%;
+  height: 100vh;
+  border: 1px solid transparent;
+
+  /* Desktop */
+  @media only screen and (min-width: $desktop-width) {
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
-.App {
+section {
+  position: relative;
+  top: 40%;
+  border-radius: $border-radius;
+  box-shadow: 0 7px 7px $white, 0 5px 5px $white, 0 -1px 3px $white;
+  transform: translateY(-50%);
+  margin: 10px;
+  height: auto;
+}
+
+.container-fluid {
   text-align: center;
+  padding-right: 0;
+  padding-left: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.card {
+  border-radius: $border-radius $border-radius 0 0;
+  text-align: right;
+  background-color: $gray;
+  color: $white;
+  font-family: 'Coda', cursive;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.card-body {
+  padding: 1em 1.5em;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.card-title {
+  margin-bottom: 2px;
+  font-size: 30px;
+  min-height: 36px;
 }
 
-.App-link {
-  color: #61dafb;
+.card-text {
+  margin-bottom: 1em;
+  font-size: 17px;
+  min-height: 35px;
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.error {
+  color: $red;
 }

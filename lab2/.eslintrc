@@ -11,11 +11,10 @@
   "globals": {
     "fetchMock": "writable"
   },
-  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks", "import", "jsdoc"],
+  "plugins": ["@typescript-eslint", "prettier", "react", "react-hooks", "import"],
   "rules": {
     "prettier/prettier": "error",
     "no-useless-constructor": "off",
-    "no-console": "error",
     "no-confusing-arrow": ["error", { "allowParens": false }],
     "no-mixed-operators": [
       "error",
@@ -113,79 +112,6 @@
     "valid-jsdoc": "off",
     "complexity": ["error", { "max": 10 }],
     "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/no-empty-function": "off",
-    "jsdoc/check-alignment": 2,
-    "jsdoc/check-examples": 0,
-    "jsdoc/check-indentation": 2,
-    "jsdoc/check-param-names": 2,
-    "jsdoc/check-syntax": 2,
-    "jsdoc/check-tag-names": 2,
-    "jsdoc/check-types": 2,
-    "jsdoc/implements-on-classes": 2,
-    "jsdoc/match-description": ["error", { "matchDescription": "^([A-Z]|[`\\d_])[\\s\\S]*" }],
-    "jsdoc/newline-after-description": 0,
-    "jsdoc/no-types": 0,
-    "jsdoc/no-undefined-types": 2,
-    "jsdoc/require-description": 0,
-    "jsdoc/require-description-complete-sentence": 0,
-    "jsdoc/require-example": 0,
-    "jsdoc/require-hyphen-before-param-description": 0,
-    "jsdoc/require-jsdoc": 1,
-    "jsdoc/require-param": 2,
-    "jsdoc/require-param-description": 0,
-    "jsdoc/require-param-name": 2,
-    "jsdoc/require-param-type": 0,
-    "jsdoc/require-returns": 2,
-    "jsdoc/require-returns-check": 2,
-    "jsdoc/require-returns-description": 2,
-    "jsdoc/require-returns-type": 0,
-    "jsdoc/valid-types": 2
-  },
-  "overrides": [
-    {
-      "files": ["*.d.ts"],
-      "rules": {
-        "require-jsdoc": "off",
-        "valid-jsdoc": "off",
-        "jsdoc/require-jsdoc": 0,
-        "@typescript-eslint/explicit-member-accessibility": "off",
-        "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/no-empty-interface": "off",
-        "@typescript-eslint/prefer-interface": "off"
-      }
-    },
-    {
-      "files": ["src/serviceWorker.js"],
-      "rules": {
-        "require-jsdoc": "off",
-        "valid-jsdoc": "off",
-        "jsdoc/require-jsdoc": 0,
-        "@typescript-eslint/explicit-function-return-type": "off",
-        "@typescript-eslint/no-explicit-any": "off",
-        "@typescript-eslint/ban-ts-ignore": "off",
-        "@typescript-eslint/no-empty-function": "off",
-        "import/no-extraneous-dependencies": [
-          "error",
-          {
-            "optionalDependencies": false
-          }
-        ]
-      }
-    },
-    {
-      "files": ["*.css", "*.scss", "*.less"],
-      "rules": {
-        "require-jsdoc": "off",
-        "valid-jsdoc": "off",
-        "jsdoc/require-jsdoc": 0,
-        "arrow-parens": ["off", "always"],
-        "arrow-body-style": ["off", "always"]
-      }
-    }
-  ],
-  "settings": {
-    "jsdoc": {
-      "mode": "typescript"
-    }
+    "@typescript-eslint/no-empty-function": "off"
   }
 }

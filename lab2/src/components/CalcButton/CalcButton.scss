@@ -1,0 +1,49 @@
+@import '../../Variables.scss';
+
+.btn {
+  border-radius: $border-radius-small;
+  background-color: $white;
+  border: 1px solid $light-black;
+  height: 70px;
+  font-size: 20px;
+}
+
+.btn:focus,
+.btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.topLeft {
+  border-top-left-radius: 0;
+}
+
+.topRight {
+  border-top-right-radius: 0;
+}
+
+.bottomLeft {
+  border-bottom-left-radius: $border-radius;
+}
+
+.bottomRight {
+  border-bottom-right-radius: $border-radius;
+}
+
+.action {
+  background-color: $yellow;
+  color: $red;
+  font-weight: bold;
+}
+
+.left {
+  border-left-width: 2px;
+}
+
+.right {
+  border-right-width: 2px;
+}
+
+.bottom {
+  border-bottom-width: 2px;
+}

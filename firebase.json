@@ -1,20 +1,62 @@
 {
-  "hosting": {
-    "public": "lab1",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**, *.txt"],
-    "headers": [
-      {
+  "hosting": [{
+      "target": "default",
+      "public": "lab1",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**, *.txt"
+      ],
+      "headers": [{
         "source": "**/*.@(jpg|jpeg|gif|png|css|svg)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "max-age=8400"
-          }
-        ]
-      }
-    ],
-    "rewrites": [],
-    "cleanUrls": true,
-    "trailingSlash": false
-  }
+        "headers": [{
+          "key": "Cache-Control",
+          "value": "max-age=8400"
+        }]
+      }],
+      "rewrites": [],
+      "cleanUrls": true,
+      "trailingSlash": false
+    }, {
+      "target": "lab1",
+      "public": "lab1",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**, *.txt"
+      ],
+      "headers": [{
+        "source": "**/*.@(jpg|jpeg|gif|png|css|svg)",
+        "headers": [{
+          "key": "Cache-Control",
+          "value": "max-age=8400"
+        }]
+      }],
+      "rewrites": [],
+      "cleanUrls": true,
+      "trailingSlash": false
+    },
+    {
+      "target": "lab2",
+      "public": "lab2/build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "headers": [{
+        "source": "**/*.@(jpg|jpeg|gif|png|css|svg)",
+        "headers": [{
+          "key": "Cache-Control",
+          "value": "max-age=8400"
+        }]
+      }],
+      "rewrites": [{
+        "source": "**",
+        "destination": "/index.html"
+      }],
+      "cleanUrls": true,
+      "trailingSlash": false
+    }
+  ]
 }

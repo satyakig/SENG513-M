@@ -3,43 +3,14 @@ import 'react-app-polyfill/ie11'; //  See https://github.com/facebook/create-rea
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { Reducer, Store, applyMiddleware, createStore } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import { LogEntryObject, createLogger } from 'redux-logger';
 import App from 'components/App/App';
-import combinedReducer, { ReduxState } from 'redux/CombinedReducer';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const reducer: Reducer<ReduxState, any> = combinedReducer;
-
-const loggerMiddleware = createLogger({
-  collapsed: (getState, action, logEntry?: LogEntryObject) => {
-    return (logEntry as LogEntryObject) && !(logEntry as LogEntryObject).error;
-  },
-  predicate: () => {
-    return true;
-  },
-  duration: true,
-  timestamp: false,
-  diff: true,
-});
-
-const store: Store = createStore(reducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
-
-if (module.hot) {
-  module.hot.accept('redux/CombinedReducer', () => {
-    store.replaceReducer(reducer);
-  });
-}
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const render = (Component: any): void => {
   return ReactDOM.render(
-    <Provider store={store}>
-      <BrowserRouter basename="">
-        <Component />
-      </BrowserRouter>
-    </Provider>,
+    <BrowserRouter basename="">
+      <Component />
+    </BrowserRouter>,
     document.getElementById('root'),
   );
 };

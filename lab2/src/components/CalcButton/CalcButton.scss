@@ -1,10 +1,11 @@
-@import '../../Variables.scss';
+@import '../../StyleVariables';
 
 .btn {
-  border-radius: $border-radius-small;
-  background-color: $white;
-  border: 1px solid $light-black;
-  height: 70px;
+  background-color: $dark-black;
+  color: $blue;
+  border-radius: 0;
+  border-width: 1px;
+  border-color: $blue;
   font-size: 20px;
 }
 
@@ -31,8 +32,8 @@
 }
 
 .action {
-  background-color: $yellow;
-  color: $red;
+  border-color: $yellow;
+  color: $yellow;
   font-weight: bold;
 }
 
@@ -40,8 +41,18 @@
   border-left-width: 2px;
 }
 
+.hMid {
+}
+
 .right {
   border-right-width: 2px;
+}
+
+.top {
+  border-top: 0;
+}
+
+.vMid {
 }
 
 .bottom {

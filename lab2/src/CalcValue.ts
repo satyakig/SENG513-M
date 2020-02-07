@@ -3,12 +3,12 @@ export interface CalcValueType {
   action: boolean;
 }
 
-const LEFT_BRACKET: CalcValueType = {
+export const LEFT_BRACKET: CalcValueType = {
   value: '(',
   action: false,
 };
 
-const RIGHT_BRACKET: CalcValueType = {
+export const RIGHT_BRACKET: CalcValueType = {
   value: ')',
   action: false,
 };

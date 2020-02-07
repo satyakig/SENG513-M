@@ -65,12 +65,20 @@ export const CalcButton = (props: CalcButtonProps): JSX.Element => {
     extraClasses = `${extraClasses} top`;
   }
 
+  if (props.vOrientation === VerticalOrientation.MID) {
+    extraClasses = `${extraClasses} vMid`;
+  }
+
   if (props.vOrientation === VerticalOrientation.BOTTOM) {
     extraClasses = `${extraClasses} bottom`;
   }
 
   if (props.hOrientation === HorizontalOrientation.RIGHT) {
     extraClasses = `${extraClasses} right`;
+  }
+
+  if (props.hOrientation === HorizontalOrientation.MID) {
+    extraClasses = `${extraClasses} hMid`;
   }
 
   if (props.hOrientation === HorizontalOrientation.LEFT) {
@@ -83,9 +91,11 @@ export const CalcButton = (props: CalcButtonProps): JSX.Element => {
 
   extraClasses = extraClasses.trim();
 
+  const variant = props.button.action ? 'outline-warning' : 'outline-info';
+
   return (
     <Col>
-      <Button block={true} onClick={onClick} variant="outline-dark" className={extraClasses}>
+      <Button block={true} onClick={onClick} variant={variant} className={extraClasses}>
         {props.button.value}
       </Button>
     </Col>

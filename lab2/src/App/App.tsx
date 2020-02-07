@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Card, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -12,16 +12,21 @@ import {
   PLUS,
   ROWS,
   LEFT_BRACKET,
+  RIGHT_BRACKET,
 } from 'CalcValue';
 import { CalcRow, VerticalOrientation } from '../CalcRow/CalcRow';
 import './App.scss';
-import { evaluateExpression } from '../../Evaluate';
+import { evaluateExpression } from '../Evaluate';
+
+const symbols: CalcValueType[] = [PLUS, MINUS, MULTIPLY, DIVIDE, LEFT_BRACKET, RIGHT_BRACKET];
 
 const App = (): JSX.Element => {
   const [lastExp, setLastExp] = useState<string>('');
   const [lastVal, setLastVal] = useState<number>(Number.NaN);
+  const [lastDisplay, setLastDisplay] = useState<string>('');
 
   const [current, setCurrent] = useState<string>('');
+  const [currentDisplay, setCurrentDisplay] = useState<string>('');
 
   function valueUpdater(val: string): void {
     switch (val) {
@@ -55,9 +60,31 @@ const App = (): JSX.Element => {
     }
   }
 
+  const formatDisplay = useCallback((input: string) => {
+    let newVal = input;
+    for (let i = 0; i < symbols.length; i++) {
+      const delimiter = symbols[i].value;
+      newVal = newVal.split(delimiter).join(` ${delimiter} `);
+    }
+
+    return newVal;
+  }, []);
+
   useEffect(() => {
     setLastVal(evaluateExpression(lastExp));
   }, [lastExp]);
+
+  useEffect(() => {
+    if (lastExp.length > 0) {
+      setLastDisplay(`${formatDisplay(lastExp)} = ${lastVal}`);
+    } else {
+      setLastDisplay('');
+    }
+  }, [formatDisplay, lastExp, lastVal]);
+
+  useEffect(() => {
+    setCurrentDisplay(`${formatDisplay(current)}`);
+  }, [current, formatDisplay]);
 
   return (
     <main>
@@ -66,9 +93,9 @@ const App = (): JSX.Element => {
           <Card>
             <Card.Body>
               <Card.Text className={lastExp.length > 0 && Number.isNaN(lastVal) ? 'error' : ''}>
-                {lastExp.length > 0 ? `${lastExp} = ${lastVal}` : ''}
+                {lastDisplay}
               </Card.Text>
-              <Card.Title>{current}</Card.Title>
+              <Card.Title>{currentDisplay}</Card.Title>
             </Card.Body>
           </Card>
           {ROWS.map(

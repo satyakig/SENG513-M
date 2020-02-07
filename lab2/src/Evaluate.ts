@@ -1,84 +1,26 @@
 import { MULTIPLY, LEFT_BRACKET, RIGHT_BRACKET } from './CalcValue';
 
+const regexes = [/([\d])(\(.*?\))/, /(\(.*?\))(\(.*?\))/, /(\(.*?\))([\d])/];
+
 export function evaluateExpression(input: string): number {
-  let exp = input
-    .split(' ')
-    .join('')
-    .trim();
+  let exp = input;
 
-  const regex1 = /\((\d+)\)/g;
-  const regex2 = /\((\d+\.\d+)\)/g;
+  for (let i = 0; i < regexes.length; i++) {
+    const reg = regexes[i];
 
-  let matches = [...exp.matchAll(regex1)];
+    let match = exp.match(reg);
 
-  while (matches.length > 0) {
-    const match = matches[0];
-    let val = match[1] as string;
-    const index = match.index as number;
-    const lastIndex = index + match[0].length;
+    while (match !== null) {
+      const first = match[1] as string;
+      const second = match[2] as string;
+      const startIndex = match.index as number;
+      const lastIndex = startIndex + match[0].length;
 
-    if (index > 0) {
-      const prevValue = exp[index - 1];
+      const val = `${first}${MULTIPLY.value}${second}`;
 
-      if (prevValue === RIGHT_BRACKET.value) {
-        val = `${MULTIPLY.value}${val}`;
-      }
-
-      if (!isNaN(parseInt(prevValue))) {
-        val = `${MULTIPLY.value}${val}`;
-      }
+      exp = `${exp.substr(0, startIndex)}${val}${exp.substr(lastIndex)}`;
+      match = exp.match(reg);
     }
-
-    if (lastIndex < exp.length) {
-      const nextValue = exp[lastIndex];
-
-      if (nextValue === LEFT_BRACKET.value) {
-        val = `${val}${MULTIPLY.value}`;
-      }
-
-      if (!isNaN(parseInt(nextValue))) {
-        val = `${val}${MULTIPLY.value}`;
-      }
-    }
-
-    exp = `${exp.substr(0, index)}${val}${exp.substr(lastIndex)}`;
-    matches = [...exp.matchAll(regex1)];
-  }
-
-  matches = [...exp.matchAll(regex2)];
-
-  while (matches.length > 0) {
-    const match = matches[0];
-    let val = match[1] as string;
-    const index = match.index as number;
-    const lastIndex = index + match[0].length;
-
-    if (index > 0) {
-      const prevValue = exp[index - 1];
-
-      if (prevValue === RIGHT_BRACKET.value) {
-        val = `${MULTIPLY.value}${val}`;
-      }
-
-      if (!isNaN(parseInt(prevValue))) {
-        val = `${MULTIPLY.value}${val}`;
-      }
-    }
-
-    if (lastIndex < exp.length) {
-      const nextValue = exp[lastIndex];
-
-      if (nextValue === LEFT_BRACKET.value) {
-        val = `${val}${MULTIPLY.value}`;
-      }
-
-      if (!isNaN(parseInt(nextValue))) {
-        val = `${val}${MULTIPLY.value}`;
-      }
-    }
-
-    exp = `${exp.substr(0, index)}${val}${exp.substr(lastIndex)}`;
-    matches = [...exp.matchAll(regex2)];
   }
 
   try {

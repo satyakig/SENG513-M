@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row } from 'react-bootstrap';
-import { CalcValueType } from '../../CalcValue';
+import { CalcValueType } from '../CalcValue';
 import { CalcButton, HorizontalOrientation } from '../CalcButton/CalcButton';
 import './CalcRow.scss';
 

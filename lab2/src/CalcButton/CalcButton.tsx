@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { Button, Col } from 'react-bootstrap';
 import { VerticalOrientation } from '../CalcRow/CalcRow';
-import { CalcValueType, EQUAL } from '../../CalcValue';
+import { CalcValueType, CE, EQUAL } from '../CalcValue';
 import './CalcButton.scss';
 
 export enum HorizontalOrientation {
@@ -27,6 +27,11 @@ export const CalcButton = (props: CalcButtonProps): JSX.Element => {
       if (event.key === props.button.value) {
         onClick();
       } else if (props.button.value === EQUAL.value && event.key === 'Enter') {
+        onClick();
+      } else if (
+        props.button.value === CE.value &&
+        (event.key === 'Backspace' || event.key === 'Delete')
+      ) {
         onClick();
       }
     },

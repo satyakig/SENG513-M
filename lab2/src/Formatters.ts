@@ -9,7 +9,7 @@ import {
   RIGHT_BRACKET,
 } from './CalcValue';
 
-const regexes = [/([\d])(\(.*?\))/, /(\(.*?\))(\(.*?\))/, /(\(.*?\))([\d])/];
+const regexes = [/([\d])(\(.*?)/, /(\(.*?\))(\(.*?\))/, /(.*?\))([\d])/];
 const symbols: CalcValueType[] = [PLUS, MINUS, MULTIPLY, DIVIDE, LEFT_BRACKET, RIGHT_BRACKET];
 
 export function formatExpression(input: string): string {

@@ -6,7 +6,13 @@
   border-radius: 0;
   border-width: 1px;
   border-color: $blue;
-  font-size: 20px;
+  font-size: 3vh;
+
+  /* Mobile */
+  @media only screen and (max-width: $desktop-width) {
+    height: 12vh;
+    font-size: 5vh;
+  }
 }
 
 .btn:focus,

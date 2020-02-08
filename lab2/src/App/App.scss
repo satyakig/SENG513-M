@@ -7,6 +7,30 @@ body {
   -moz-osx-font-smoothing: grayscale;
   user-select: none;
   background: $light-black;
+
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  *::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    background-color: $yellow;
+  }
+
+  *::-webkit-scrollbar-track {
+    border-radius: 50px;
+    background-color: $gray;
+  }
+
+  *::-webkit-scrollbar-corner {
+    background: transparent;
+  }
 }
 
 main {
@@ -24,12 +48,19 @@ main {
 
 section {
   position: relative;
-  top: 40%;
   border-radius: $border-radius;
-  //box-shadow: 0 7px 7px $white, 0 5px 5px $white, 0 -1px 3px $white;
+  box-shadow: 0 3px 2px $blue, 0 4px 3px $blue, 0 -2px 1px $white, 0 -3px 2px $white,
+    2px 0 2px $yellow, 4px 0 4px $yellow;
   transform: translateY(-50%);
+  top: 47%;
   margin: 10px;
   height: auto;
+
+  /* Mobile */
+  @media only screen and (max-width: $desktop-width) {
+    transform: translateY(-50%);
+    top: 48%;
+  }
 }
 
 .container-fluid {
@@ -46,23 +77,46 @@ section {
   font-family: 'Coda', cursive;
   border: 1px solid $dark-white;
   border-bottom-width: 1.5px;
+  height: 25vh;
+
+  /* Mobile */
+  @media only screen and (max-width: $desktop-width) {
+    height: 30vh;
+  }
 }
 
 .card-body {
   padding: 1em 1.5em;
+  border-radius: $border-radius $border-radius 0 0;
+}
+
+.card-text {
+  margin-bottom: 10px;
+  font-size: 17px;
+  min-height: 35px;
+  font-weight: bold;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 6vh;
+
+  /* Mobile */
+  @media only screen and (max-width: $desktop-width) {
+    height: 8vh;
+  }
 }
 
 .card-title {
   margin-bottom: 2px;
   font-size: 30px;
-  min-height: 36px;
-}
+  min-height: 40px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 15vh;
 
-.card-text {
-  margin-bottom: 1em;
-  font-size: 17px;
-  min-height: 35px;
-  font-weight: bold;
+  /* Mobile */
+  @media only screen and (max-width: $desktop-width) {
+    height: 20vh;
+  }
 }
 
 .error {

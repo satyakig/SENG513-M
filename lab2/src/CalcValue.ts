@@ -114,3 +114,25 @@ export const ROW_4: CalcValueType[] = [ONE, TWO, THREE, MINUS];
 export const ROW_5: CalcValueType[] = [ZERO, DOT, EQUAL, PLUS];
 
 export const ROWS: CalcValueType[][] = [ROW_1, ROW_2, ROW_3, ROW_4, ROW_5];
+
+export const VALID_KEYS = [
+  LEFT_BRACKET.value,
+  RIGHT_BRACKET.value,
+  SEVEN.value,
+  EIGHT.value,
+  NINE.value,
+  DIVIDE.value,
+  FOUR.value,
+  FIVE.value,
+  SIX.value,
+  MULTIPLY.value,
+  ONE.value,
+  TWO.value,
+  THREE.value,
+  MINUS.value,
+  ZERO.value,
+  DOT.value,
+  PLUS.value,
+  'Delete',
+  'Backspace',
+];

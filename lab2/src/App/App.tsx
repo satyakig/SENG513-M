@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Card, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -13,6 +13,7 @@ import {
   ROWS,
   LEFT_BRACKET,
   RIGHT_BRACKET,
+  VALID_KEYS,
 } from 'CalcValue';
 import { CalcRow, VerticalOrientation } from '../CalcRow/CalcRow';
 import './App.scss';
@@ -25,53 +26,78 @@ const App = (): JSX.Element => {
     currentExp: '',
   });
 
-  function valueUpdater(val: string): void {
-    let newState = null;
+  const valueUpdater = useCallback(
+    (val: string) => {
+      let newState = null;
 
-    switch (val) {
-      case C.value:
-        newState = {
-          lastExp: '',
-          lastVal: Number.NaN,
-          currentExp: '',
-        };
-        break;
-      case CE.value:
-        newState = {
-          ...state,
-          currentExp: formatExpression(state.currentExp.slice(0, -1)),
-        };
-        break;
-      case EQUAL.value:
-        newState = {
-          lastExp: state.currentExp,
-          lastVal: evaluate(state.currentExp),
-          currentExp: '',
-        };
-        break;
-      case DIVIDE.value:
-      case MULTIPLY.value:
-      case PLUS.value:
-      case MINUS.value:
-      case LEFT_BRACKET.value:
-      case RIGHT_BRACKET.value:
-        if (state.currentExp.length === 0 && state.lastExp.length > 0) {
+      switch (val) {
+        case C.value:
           newState = {
-            ...state,
-            currentExp: formatExpression(`${state.lastVal}${val}`),
+            lastExp: '',
+            lastVal: Number.NaN,
+            currentExp: '',
           };
           break;
-        }
-      default:
-        newState = {
-          ...state,
-          currentExp: formatExpression(`${state.currentExp}${val}`),
-        };
-        break;
-    }
+        case CE.value:
+          newState = {
+            ...state,
+            currentExp: formatExpression(state.currentExp.slice(0, -1)),
+          };
+          break;
+        case EQUAL.value:
+          newState = {
+            lastExp: state.currentExp,
+            lastVal: evaluate(state.currentExp),
+            currentExp: '',
+          };
+          break;
+        case DIVIDE.value:
+        case MULTIPLY.value:
+        case PLUS.value:
+        case MINUS.value:
+        case LEFT_BRACKET.value:
+        case RIGHT_BRACKET.value:
+          if (state.currentExp.length === 0 && state.lastExp.length > 0) {
+            newState = {
+              ...state,
+              currentExp: formatExpression(`${state.lastVal}${val}`),
+            };
+            break;
+          }
+        default:
+          newState = {
+            ...state,
+            currentExp: formatExpression(`${state.currentExp}${val}`),
+          };
+          break;
+      }
 
-    setState(newState);
-  }
+      setState(newState);
+    },
+    [state],
+  );
+
+  const keyPress = useCallback(
+    (event: KeyboardEvent) => {
+      if (VALID_KEYS.indexOf(event.key) >= 0) {
+        let val = event.key;
+        if (val === 'Backspace' || val === 'Delete') {
+          val = CE.value;
+        }
+
+        valueUpdater(val);
+      }
+    },
+    [valueUpdater],
+  );
+
+  useEffect(() => {
+    document.addEventListener('keyup', keyPress, false);
+
+    return (): void => {
+      document.removeEventListener('keyup', keyPress, false);
+    };
+  }, [keyPress]);
 
   return (
     <main>

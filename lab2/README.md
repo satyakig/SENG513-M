@@ -1,29 +1,28 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# COURSE: SENG 513 Winter 2020
 
-## Available Scripts
+- ASSIGNMENT: 2
+- TUTORIAL: B02
+- NAME: Satyaki Ghosh
+- ID: 10077685
+- URL: https://lab2-seng513.web.app/
+- BROWSERS: Chrome, Firefox
 
-In the project directory, you can run:
+<br />
 
-### `npm start`
+This project was create with [Create React App](https://github.com/facebook/create-react-app).
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Project Setup and Requirements
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+1. Install NodeJS v12.xx.xx from https://nodejs.org/en/download/releases/
+1. Run `npm install` to install all the dependencies
+1. Run `npm start` to start/run the application locally
+1. Application will start on https://localhost:3000
+1. Or, you can run `npm run build` to create a static file version of the code and it will be stored in `build/`
 
-### `npm run build`
+### Dependencies
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. React and its modules
+1. Bootstrap (React Bootstrap)
+1. Code style linters (ESLint, Prettier, Stylelint) and their dependencies
+1. Type definitions for all the npm modules (TypeScript requirements)
+1. Scss for styling and its compiler

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Card, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -16,75 +16,62 @@ import {
 } from 'CalcValue';
 import { CalcRow, VerticalOrientation } from '../CalcRow/CalcRow';
 import './App.scss';
-import { evaluateExpression } from '../Evaluate';
-
-const symbols: CalcValueType[] = [PLUS, MINUS, MULTIPLY, DIVIDE, LEFT_BRACKET, RIGHT_BRACKET];
+import { evaluate, formatExpression, formatDisplay } from '../Formatters';
 
 const App = (): JSX.Element => {
-  const [lastExp, setLastExp] = useState<string>('');
-  const [lastVal, setLastVal] = useState<number>(Number.NaN);
-  const [lastDisplay, setLastDisplay] = useState<string>('');
-
-  const [current, setCurrent] = useState<string>('');
-  const [currentDisplay, setCurrentDisplay] = useState<string>('');
+  const [state, setState] = useState({
+    lastExp: '',
+    lastVal: Number.NaN,
+    currentExp: '',
+  });
 
   function valueUpdater(val: string): void {
+    let newState = null;
+
     switch (val) {
       case C.value:
-        setLastExp('');
-        setCurrent('');
+        newState = {
+          lastExp: '',
+          lastVal: Number.NaN,
+          currentExp: '',
+        };
         break;
       case CE.value:
-        setCurrent(current.slice(0, -1));
+        newState = {
+          ...state,
+          currentExp: formatExpression(state.currentExp.slice(0, -1)),
+        };
         break;
       case EQUAL.value:
-        if (current.length > 0) {
-          setLastExp(current);
-          setCurrent('');
-        }
+        newState = {
+          lastExp: state.currentExp,
+          lastVal: evaluate(state.currentExp),
+          currentExp: '',
+        };
         break;
       case DIVIDE.value:
       case MULTIPLY.value:
       case PLUS.value:
       case MINUS.value:
       case LEFT_BRACKET.value:
-        if (current.length === 0 && lastExp.length > 0) {
-          setCurrent(`${lastVal}${val}`);
-        } else {
-          setCurrent(`${current}${val}`);
+      case RIGHT_BRACKET.value:
+        if (state.currentExp.length === 0 && state.lastExp.length > 0) {
+          newState = {
+            ...state,
+            currentExp: formatExpression(`${state.lastVal}${val}`),
+          };
+          break;
         }
-        break;
       default:
-        setCurrent(`${current}${val}`);
+        newState = {
+          ...state,
+          currentExp: formatExpression(`${state.currentExp}${val}`),
+        };
         break;
     }
+
+    setState(newState);
   }
-
-  const formatDisplay = useCallback((input: string) => {
-    let newVal = input;
-    for (let i = 0; i < symbols.length; i++) {
-      const delimiter = symbols[i].value;
-      newVal = newVal.split(delimiter).join(` ${delimiter} `);
-    }
-
-    return newVal;
-  }, []);
-
-  useEffect(() => {
-    setLastVal(evaluateExpression(lastExp));
-  }, [lastExp]);
-
-  useEffect(() => {
-    if (lastExp.length > 0) {
-      setLastDisplay(`${formatDisplay(lastExp)} = ${lastVal}`);
-    } else {
-      setLastDisplay('');
-    }
-  }, [formatDisplay, lastExp, lastVal]);
-
-  useEffect(() => {
-    setCurrentDisplay(`${formatDisplay(current)}`);
-  }, [current, formatDisplay]);
 
   return (
     <main>
@@ -92,10 +79,12 @@ const App = (): JSX.Element => {
         <Container fluid={true}>
           <Card>
             <Card.Body>
-              <Card.Text className={lastExp.length > 0 && Number.isNaN(lastVal) ? 'error' : ''}>
-                {lastDisplay}
+              <Card.Text
+                className={state.lastExp.length > 0 && Number.isNaN(state.lastVal) ? 'error' : ''}
+              >
+                {formatDisplay(state.lastExp, state.lastVal)}
               </Card.Text>
-              <Card.Title>{currentDisplay}</Card.Title>
+              <Card.Title> {formatDisplay(state.currentExp)}</Card.Title>
             </Card.Body>
           </Card>
           {ROWS.map(

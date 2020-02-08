@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { Button, Col } from 'react-bootstrap';
 import { VerticalOrientation } from '../CalcRow/CalcRow';
-import { CalcValueType, CE, EQUAL } from '../CalcValue';
+import { C, CalcValueType, CE, EQUAL } from '../CalcValue';
 import './CalcButton.scss';
 
 export enum HorizontalOrientation {
@@ -24,7 +24,9 @@ export const CalcButton = (props: CalcButtonProps): JSX.Element => {
 
   const keyPress = useCallback(
     (event: KeyboardEvent) => {
-      if (event.key === props.button.value) {
+      if (props.button.value === C.value) {
+        return;
+      } else if (event.key === props.button.value) {
         onClick();
       } else if (props.button.value === EQUAL.value && event.key === 'Enter') {
         onClick();
@@ -35,16 +37,16 @@ export const CalcButton = (props: CalcButtonProps): JSX.Element => {
         onClick();
       }
     },
-    [onClick, props.button.value],
+    [onClick, props.button],
   );
 
-  useEffect(() => {
-    document.addEventListener('keydown', keyPress, false);
-
-    return () => {
-      document.removeEventListener('keydown', keyPress, false);
-    };
-  }, [keyPress]);
+  // useEffect(() => {
+  //   document.addEventListener('keyup', keyPress, false);
+  //
+  //   return () => {
+  //     document.removeEventListener('keyup', keyPress, false);
+  //   };
+  // }, [keyPress]);
 
   let extraClasses = '';
 

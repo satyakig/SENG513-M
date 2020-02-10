@@ -17,7 +17,7 @@ import {
 } from 'CalcValue';
 import { CalcRow, VerticalOrientation } from '../CalcRow/CalcRow';
 import './App.scss';
-import { evaluate, formatExpression, formatDisplay } from '../Formatters';
+import { currentDisplay, evaluate, formatExpression, formatLastDisplay } from '../Formatters';
 
 const App = (): JSX.Element => {
   const [state, setState] = useState({
@@ -28,7 +28,7 @@ const App = (): JSX.Element => {
 
   const valueUpdater = useCallback(
     (val: string) => {
-      let newState = null;
+      let newState = state;
 
       switch (val) {
         case C.value:
@@ -45,11 +45,13 @@ const App = (): JSX.Element => {
           };
           break;
         case EQUAL.value:
-          newState = {
-            lastExp: state.currentExp,
-            lastVal: evaluate(state.currentExp),
-            currentExp: '',
-          };
+          if (state.currentExp.length > 0) {
+            newState = {
+              lastExp: state.currentExp,
+              lastVal: evaluate(state.currentExp),
+              currentExp: '',
+            };
+          }
           break;
         case DIVIDE.value:
         case MULTIPLY.value:
@@ -64,6 +66,7 @@ const App = (): JSX.Element => {
             };
             break;
           }
+        // eslint-disable-next-line no-fallthrough
         default:
           newState = {
             ...state,
@@ -81,8 +84,11 @@ const App = (): JSX.Element => {
     (event: KeyboardEvent) => {
       if (VALID_KEYS.indexOf(event.key) >= 0) {
         let val = event.key;
+
         if (val === 'Backspace' || val === 'Delete') {
           val = CE.value;
+        } else if (val === 'Enter') {
+          val = EQUAL.value;
         }
 
         valueUpdater(val);
@@ -108,9 +114,11 @@ const App = (): JSX.Element => {
               <Card.Text
                 className={state.lastExp.length > 0 && Number.isNaN(state.lastVal) ? 'error' : ''}
               >
-                {formatDisplay(state.lastExp, state.lastVal)}
+                {formatLastDisplay(state.lastExp, state.lastVal)}
               </Card.Text>
-              <Card.Title> {formatDisplay(state.currentExp)}</Card.Title>
+              <Card.Title>
+                {currentDisplay(state.currentExp, state.lastExp, state.lastVal)}
+              </Card.Title>
             </Card.Body>
           </Card>
           {ROWS.map(

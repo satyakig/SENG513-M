@@ -52,15 +52,9 @@ section {
   box-shadow: 0 3px 2px $blue, 0 4px 3px $blue, 0 -2px 1px $white, 0 -3px 2px $white,
     2px 0 2px $yellow, 4px 0 4px $yellow;
   transform: translateY(-50%);
-  top: 47%;
-  margin: 10px;
+  top: 48.5%;
+  margin: 5px;
   height: auto;
-
-  /* Mobile */
-  @media only screen and (max-width: $desktop-width) {
-    transform: translateY(-50%);
-    top: 48%;
-  }
 }
 
 .container-fluid {
@@ -77,45 +71,48 @@ section {
   font-family: 'Coda', cursive;
   border: 1px solid $dark-white;
   border-bottom-width: 1.5px;
-  height: 25vh;
+  height: 34vh;
 
   /* Mobile */
   @media only screen and (max-width: $desktop-width) {
-    height: 30vh;
+    height: 36vh;
   }
 }
 
 .card-body {
-  padding: 1em 1.5em;
+  padding: 10px 15px 0px 15px;
   border-radius: $border-radius $border-radius 0 0;
 }
 
 .card-text {
   margin-bottom: 10px;
-  font-size: 17px;
-  min-height: 35px;
+  font-size: 3vh;
+  height: 9vh;
   font-weight: bold;
   overflow-x: hidden;
   overflow-y: auto;
-  height: 6vh;
+  border-radius: 5px;
+  border: 1px solid $dark-white;
+  padding-right: 10px;
 
   /* Mobile */
   @media only screen and (max-width: $desktop-width) {
-    height: 8vh;
+    height: 10vh;
   }
 }
 
 .card-title {
-  margin-bottom: 2px;
-  font-size: 30px;
-  min-height: 40px;
+  margin-bottom: 10px;
+  font-size: 6vh;
+  height: 19vh;
   overflow-x: hidden;
   overflow-y: auto;
-  height: 15vh;
+  border-radius: 5px;
+  padding-right: 5px;
 
   /* Mobile */
   @media only screen and (max-width: $desktop-width) {
-    height: 20vh;
+    height: 19vh;
   }
 }
 

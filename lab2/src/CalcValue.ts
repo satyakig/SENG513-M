@@ -133,6 +133,8 @@ export const VALID_KEYS = [
   ZERO.value,
   DOT.value,
   PLUS.value,
+  EQUAL.value,
   'Delete',
   'Backspace',
+  'Enter',
 ];

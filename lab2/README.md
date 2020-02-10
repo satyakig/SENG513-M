@@ -16,7 +16,7 @@ This project was created with [Create React App](https://github.com/facebook/cre
 1. Install NodeJS v12 from https://nodejs.org/en/download/releases/
 1. Run `npm install` command to install all the dependencies
 1. Run `npm start` to serve and startup the application locally
-1. Application will start on http://localhost:3000/
+1. Application will start on `http://localhost:3000/`
 1. Or, you can run `npm run build` to create a static file version of the code and it will be stored in `build/`
 
 ### Dependencies

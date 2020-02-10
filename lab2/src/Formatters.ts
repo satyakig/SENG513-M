@@ -14,6 +14,9 @@ const symbols: CalcValueType[] = [PLUS, MINUS, MULTIPLY, DIVIDE, LEFT_BRACKET, R
 
 export function formatExpression(input: string): string {
   let exp = input;
+  if (exp.length < 1) {
+    return exp;
+  }
 
   for (let i = 0; i < regexes.length; i++) {
     const reg = regexes[i];
@@ -33,6 +36,11 @@ export function formatExpression(input: string): string {
     }
   }
 
+  for (let i = 0; i < symbols.length; i++) {
+    const delimiter = symbols[i].value;
+    exp = exp.split(delimiter).join(` ${delimiter} `);
+  }
+
   return exp;
 }
 
@@ -42,6 +50,7 @@ export function evaluate(input: string): number {
   }
 
   try {
+    // eslint-disable-next-line no-eval
     const value = eval(input);
     return Number(value);
   } catch (err) {
@@ -49,16 +58,22 @@ export function evaluate(input: string): number {
   }
 }
 
-export function formatDisplay(exp: string, val?: number): string {
+export function formatLastDisplay(exp: string, val: number): string {
   if (exp.length < 1) {
     return exp;
   }
 
-  let newExp = exp;
-  for (let i = 0; i < symbols.length; i++) {
-    const delimiter = symbols[i].value;
-    newExp = newExp.split(delimiter).join(` ${delimiter} `);
+  if (Number.isNaN(val)) {
+    return `${exp} ${EQUAL.value} Error`;
   }
 
-  return val !== undefined ? `${newExp} ${EQUAL.value} ${val}` : newExp;
+  return `${exp} ${EQUAL.value} ${val}`;
+}
+
+export function currentDisplay(exp: string, lastExp: string, lastVal: number): string {
+  if (exp.length < 1 && lastExp.length > 0) {
+    return Number.isNaN(lastVal) ? 'Error' : `${lastVal}`;
+  }
+
+  return exp;
 }

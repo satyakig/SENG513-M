@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Card, Container } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -13,7 +13,6 @@ import {
   ROWS,
   LEFT_BRACKET,
   RIGHT_BRACKET,
-  VALID_KEYS,
 } from 'CalcValue';
 import { CalcRow, VerticalOrientation } from '../CalcRow/CalcRow';
 import './App.scss';
@@ -39,10 +38,13 @@ const App = (): JSX.Element => {
           };
           break;
         case CE.value:
-          newState = {
-            ...state,
-            currentExp: formatExpression(state.currentExp.slice(0, -1)),
-          };
+          if (state.currentExp.length > 0) {
+            newState = {
+              ...state,
+              currentExp: formatExpression(state.currentExp.slice(0, -1)),
+            };
+          }
+
           break;
         case EQUAL.value:
           if (state.currentExp.length > 0) {
@@ -79,31 +81,6 @@ const App = (): JSX.Element => {
     },
     [state],
   );
-
-  const keyPress = useCallback(
-    (event: KeyboardEvent) => {
-      if (VALID_KEYS.indexOf(event.key) >= 0) {
-        let val = event.key;
-
-        if (val === 'Backspace' || val === 'Delete') {
-          val = CE.value;
-        } else if (val === 'Enter') {
-          val = EQUAL.value;
-        }
-
-        valueUpdater(val);
-      }
-    },
-    [valueUpdater],
-  );
-
-  useEffect(() => {
-    document.addEventListener('keyup', keyPress, false);
-
-    return (): void => {
-      document.removeEventListener('keyup', keyPress, false);
-    };
-  }, [keyPress]);
 
   return (
     <main>

@@ -13,7 +13,7 @@ const regexes = [/([\d])(\(.*?)/, /(\(.*?\))(\(.*?\))/, /(.*?\))([\d])/];
 const symbols: CalcValueType[] = [PLUS, MINUS, MULTIPLY, DIVIDE, LEFT_BRACKET, RIGHT_BRACKET];
 
 export function formatExpression(input: string): string {
-  let exp = input;
+  let exp = input.trim();
   if (exp.length < 1) {
     return exp;
   }
@@ -41,7 +41,7 @@ export function formatExpression(input: string): string {
     exp = exp.split(delimiter).join(` ${delimiter} `);
   }
 
-  return exp;
+  return exp.trim();
 }
 
 export function evaluate(input: string): number {

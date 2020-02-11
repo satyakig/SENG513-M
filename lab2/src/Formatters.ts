@@ -1,16 +1,7 @@
-import {
-  CalcValueType,
-  DIVIDE,
-  EQUAL,
-  LEFT_BRACKET,
-  MINUS,
-  MULTIPLY,
-  PLUS,
-  RIGHT_BRACKET,
-} from './CalcValue';
+import { CalcValueType, DIVIDE, EQUAL, MINUS, MULTIPLY, PLUS } from './CalcValue';
 
 const regexes = [/([\d])(\(.*?)/, /(\(.*?\))(\(.*?\))/, /(.*?\))([\d])/];
-const symbols: CalcValueType[] = [PLUS, MINUS, MULTIPLY, DIVIDE, LEFT_BRACKET, RIGHT_BRACKET];
+const symbols: CalcValueType[] = [PLUS, MINUS, MULTIPLY, DIVIDE];
 
 export function formatExpression(input: string): string {
   let exp = input.trim();
@@ -38,7 +29,8 @@ export function formatExpression(input: string): string {
 
   for (let i = 0; i < symbols.length; i++) {
     const delimiter = symbols[i].value;
-    exp = exp.split(delimiter).join(` ${delimiter} `);
+    const pattern = `[\\s]*[${delimiter}][\\s]*`;
+    exp = exp.split(new RegExp(pattern)).join(` ${delimiter} `);
   }
 
   return exp.trim();

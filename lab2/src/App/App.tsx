@@ -93,7 +93,15 @@ const App = (): JSX.Element => {
               >
                 {formatLastDisplay(state.lastExp, state.lastVal)}
               </Card.Text>
-              <Card.Title>
+              <Card.Title
+                className={
+                  state.currentExp.length === 0 &&
+                  state.lastExp.length > 0 &&
+                  Number.isNaN(state.lastVal)
+                    ? 'error'
+                    : ''
+                }
+              >
                 {currentDisplay(state.currentExp, state.lastExp, state.lastVal)}
               </Card.Title>
             </Card.Body>

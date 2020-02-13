@@ -29,8 +29,10 @@ export function formatExpression(input: string): string {
 
   for (let i = 0; i < symbols.length; i++) {
     const delimiter = symbols[i].value;
-    const pattern = `[\\s]*[${delimiter}][\\s]*`;
-    exp = exp.split(new RegExp(pattern)).join(` ${delimiter} `);
+    exp = exp
+      .split(delimiter)
+      .join(` ${delimiter} `)
+      .replace(/\s\s+/g, ' ');
   }
 
   return exp.trim();

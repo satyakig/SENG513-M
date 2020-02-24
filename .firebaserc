@@ -5,6 +5,9 @@
   "targets": {
     "seng513-labs": {
       "hosting": {
+        "lab3": [
+          "lab3-seng513"
+        ],
         "lab2": [
           "lab2-seng513"
         ],

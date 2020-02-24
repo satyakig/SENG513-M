@@ -1,37 +1,39 @@
 {
-  "hosting": [{
+  "hosting": [
+    {
       "target": "default",
       "public": "lab1",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**, *.txt"
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**, *.txt"],
+      "headers": [
+        {
+          "source": "**/*.@(jpg|jpeg|gif|png|css|svg)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=8400"
+            }
+          ]
+        }
       ],
-      "headers": [{
-        "source": "**/*.@(jpg|jpeg|gif|png|css|svg)",
-        "headers": [{
-          "key": "Cache-Control",
-          "value": "max-age=8400"
-        }]
-      }],
       "rewrites": [],
       "cleanUrls": true,
       "trailingSlash": false
-    }, {
+    },
+    {
       "target": "lab1",
       "public": "lab1",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**, *.txt"
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**, *.txt"],
+      "headers": [
+        {
+          "source": "**/*.@(jpg|jpeg|gif|png|css|svg)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=8400"
+            }
+          ]
+        }
       ],
-      "headers": [{
-        "source": "**/*.@(jpg|jpeg|gif|png|css|svg)",
-        "headers": [{
-          "key": "Cache-Control",
-          "value": "max-age=8400"
-        }]
-      }],
       "rewrites": [],
       "cleanUrls": true,
       "trailingSlash": false
@@ -39,22 +41,48 @@
     {
       "target": "lab2",
       "public": "lab2/build",
-      "ignore": [
-        "firebase.json",
-        "**/.*",
-        "**/node_modules/**"
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "headers": [
+        {
+          "source": "**/*.@(jpg|jpeg|gif|png|css|svg)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=8400"
+            }
+          ]
+        }
       ],
-      "headers": [{
-        "source": "**/*.@(jpg|jpeg|gif|png|css|svg)",
-        "headers": [{
-          "key": "Cache-Control",
-          "value": "max-age=8400"
-        }]
-      }],
-      "rewrites": [{
-        "source": "**",
-        "destination": "/index.html"
-      }],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "cleanUrls": true,
+      "trailingSlash": false
+    },
+    {
+      "target": "lab3",
+      "public": "lab3/client/build",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "headers": [
+        {
+          "source": "**/*.@(jpg|jpeg|gif|png|css|svg)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=8400"
+            }
+          ]
+        }
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
       "cleanUrls": true,
       "trailingSlash": false
     }

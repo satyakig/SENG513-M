@@ -1,0 +1,18 @@
+{
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "google",
+    "prettier",
+    "react-app",
+    "prettier/@typescript-eslint",
+    "prettier/react"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier", "react", "import"],
+  "rules": {
+    "prettier/prettier": "error",
+    "require-jsdoc": "off",
+    "valid-jsdoc": "off",
+    "@typescript-eslint/no-empty-function": "off"
+  }
+}

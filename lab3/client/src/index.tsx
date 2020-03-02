@@ -6,13 +6,15 @@ import { Provider } from 'react-redux';
 import { Reducer, Store, applyMiddleware, createStore } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { LogEntryObject, createLogger } from 'redux-logger';
+import { ThemeProvider } from '@material-ui/styles';
 import combinedReducer, { ReduxState } from 'redux/combinedReducer';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { THEME } from 'styles/material-kit-react';
+import 'styles/material-kit-react.scss';
 
-import App from 'App/App';
+import App from 'components/App/App';
+import { Socket } from './socket';
 
 const isDev = process.env.NODE_ENV === 'development';
-
 const loggerMiddleware = createLogger({
   collapsed: (getState, action, logEntry?: LogEntryObject) => {
     return (logEntry as LogEntryObject) && !(logEntry as LogEntryObject).error;
@@ -29,10 +31,14 @@ const reducer: Reducer<ReduxState, any> = combinedReducer;
 const store: Store = createStore(reducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 const render = (Component: any): void => {
+  Socket.setup();
+
   return ReactDOM.render(
-    <Provider store={store}>
-      <Component />
-    </Provider>,
+    <ThemeProvider theme={THEME}>
+      <Provider store={store}>
+        <Component />
+      </Provider>
+    </ThemeProvider>,
     document.getElementById('root'),
   );
 };
@@ -46,8 +52,8 @@ if (module.hot && isDev) {
 }
 
 if (module.hot && isDev) {
-  module.hot.accept('App/App', () => {
-    const NextApp = require('App/App').default;
+  module.hot.accept('components/App/App', () => {
+    const NextApp = require('components/App/App').default;
     render(NextApp);
   });
 }

@@ -1,21 +1,23 @@
-import { createStyles, Theme } from '@material-ui/core';
+import { createStyles } from '@material-ui/core';
 
-export const notificationStyles = ({ spacing }: Theme) =>
+export const notificationStyles = () =>
   createStyles({
     container: {
       position: 'absolute',
-      top: '20px',
+      top: '70px',
       width: '100%',
       display: 'flex',
       flexDirection: 'column',
       height: 'auto',
-      maxHeight: '70vh',
+      maxHeight: '50vh',
       overflow: 'hidden',
     },
     notification: {
       top: 0,
       position: 'relative',
-      marginBottom: '20px',
+      marginBottom: '10px',
+      maxWidth: '50%',
+      left: '50%',
+      transform: 'translateX(-50%)',
     },
-    root: {},
   });

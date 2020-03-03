@@ -6,6 +6,8 @@ export interface User {
   colour: string;
   joinedOn: number;
   lastActive: number;
+  active: boolean;
+  typing: boolean;
 }
 
 export interface Message {
@@ -39,6 +41,6 @@ export interface ColourChange {
   id: string;
 }
 
-export interface NewConnection {
+export interface Connection {
   id: string;
 }

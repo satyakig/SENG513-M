@@ -19,6 +19,30 @@ export function usersReducer(state: UserModel[] = [], action: AnyAction): UserMo
       .sort((a: UserModel, b: UserModel) => {
         return a.name.localeCompare(b.name);
       });
+  } else if (action.type === ACTION_TYPES.UPDATE_USERS) {
+    const updatedUsers = action.users.map((user: User) => {
+      return new UserModel(user);
+    });
+
+    return state
+      .map((stateUser: UserModel) => {
+        const findUser = updatedUsers.find((updatedUser: UserModel) => {
+          return updatedUser.id === stateUser.id;
+        });
+
+        if (findUser) {
+          return findUser;
+        }
+
+        return stateUser;
+      })
+      .sort((a: UserModel, b: UserModel) => {
+        return a.name.localeCompare(b.name);
+      });
+  } else if (action.type === ACTION_TYPES.ADD_USER) {
+    return state.concat([new UserModel(action.user)]).sort((a: UserModel, b: UserModel) => {
+      return a.name.localeCompare(b.name);
+    });
   }
 
   return state;
@@ -29,6 +53,26 @@ export function messagesReducer(state: MessageModel[] = [], action: AnyAction): 
     return action.messages
       .map((message: Message) => {
         return new MessageModel(message);
+      })
+      .sort((a: MessageModel, b: MessageModel) => {
+        return b.timestamp - a.timestamp;
+      });
+  } else if (action.type === ACTION_TYPES.UPDATE_MESSAGES) {
+    const updatedMessages = action.messages.map((message: Message) => {
+      return new MessageModel(message);
+    });
+
+    return state
+      .map((stateMessage: MessageModel) => {
+        const findMessage = updatedMessages.find((updateMessage: MessageModel) => {
+          return updateMessage.id === stateMessage.id;
+        });
+
+        if (findMessage) {
+          return findMessage;
+        }
+
+        return stateMessage;
       })
       .sort((a: MessageModel, b: MessageModel) => {
         return b.timestamp - a.timestamp;
@@ -55,9 +99,13 @@ export function notificationReducer(
         return a.timestamp - b.timestamp;
       });
   } else if (action.type === ACTION_TYPES.REMOVE_NOTIFICATION) {
-    return state.filter((notification) => {
-      return notification.id !== action.notificationId;
-    });
+    return state
+      .filter((notification) => {
+        return notification.id !== action.notificationId;
+      })
+      .sort((a: NotificationModel, b: NotificationModel) => {
+        return a.timestamp - b.timestamp;
+      });
   }
 
   return state;

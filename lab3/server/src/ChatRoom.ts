@@ -1,20 +1,24 @@
 import moment from 'moment';
-import { isColourValid, makeNewUser, randomId } from './Helpers';
+import { isColourValid, randomColour, randomId, randomName } from './Helpers';
 import { SendMessage, Message, User, ColourChange, NameChange } from './Models';
 
 export const EVENT_TYPES = {
   USER: 'USER',
   ALL_USERS: 'ALL_USERS',
+  UPDATE_USERS: 'UPDATE_USERS',
+  ADD_USER: 'ADD_USER',
 
-  NEW_MESSAGE: 'NEW_MESSAGE',
   ALL_MESSAGES: 'ALL_MESSAGES',
-
-  NAME_CHANGE: 'NAME_CHANGE',
-  COLOUR_CHANGE: 'COLOUR_CHANGE',
+  UPDATE_MESSAGES: 'UPDATE_MESSAGES',
+  ADD_MESSAGE: 'ADD_MESSAGE',
 
   NOTIFICATION: 'NOTIFICATION',
 
   NEW_CONNECTION: 'NEW_CONNECTION',
+  NEW_MESSAGE: 'NEW_MESSAGE',
+  NAME_CHANGE: 'NAME_CHANGE',
+  COLOUR_CHANGE: 'COLOUR_CHANGE',
+  USER_TYPING: 'USER_TYPING',
 };
 
 export class ChatRoom {
@@ -24,13 +28,33 @@ export class ChatRoom {
   private MESSAGES: Map<string, Message> = new Map();
 
   addNewUser(): User {
-    const newUser = makeNewUser();
+    const now = moment().valueOf();
+
+    const names = [...this.USERS.values()].map((user) => {
+      return user.name;
+    });
+
+    let name = randomName();
+    while (names.includes(name)) {
+      name = randomName();
+    }
+
+    const newUser: User = {
+      id: randomId(),
+      name,
+      colour: randomColour(),
+      joinedOn: now,
+      lastActive: now,
+      active: true,
+      typing: false,
+    };
+
     this.USERS.set(newUser.id, newUser);
 
     return newUser;
   }
 
-  getUser(id: string): User | undefined {
+  getUser(id: string, typing: boolean = false): User | undefined {
     if (!id) {
       return undefined;
     }
@@ -38,14 +62,29 @@ export class ChatRoom {
     const user = this.USERS.get(id);
 
     if (user) {
-      user.lastActive = moment().valueOf();
+      const now = moment().valueOf();
+      user.active = true;
+      user.lastActive = now;
+      user.typing = typing;
+
       this.USERS.set(user.id, user);
     }
 
     return user;
   }
 
-  addNewMessage(data: SendMessage): boolean | string {
+  setUserActivity(id: string, active: boolean): User | undefined {
+    const user = this.getUser(id);
+
+    if (user) {
+      user.active = active;
+      this.USERS.set(user.id, user);
+    }
+
+    return user;
+  }
+
+  addNewMessage(data: SendMessage): Message | string {
     const user = this.getUser(data.id);
 
     if (!user) {
@@ -63,18 +102,18 @@ export class ChatRoom {
 
     this.MESSAGES.set(newMessage.id, newMessage);
 
-    return true;
+    return newMessage;
   }
 
-  updateUserName(data: NameChange): boolean | string {
+  updateUserName(data: NameChange): Message[] | string {
     let name = data.newName.trim().replace(/\s\s+/g, ' ');
 
     if (name.length < 1) {
       return 'Name must be at least 1 character.';
     }
 
-    if (name.length > 20) {
-      return 'Name must be under 20 characters.';
+    if (name.length > 15) {
+      return 'Name must be under 15 characters.';
     }
 
     const user = this.getUser(data.id);
@@ -82,7 +121,15 @@ export class ChatRoom {
       return 'Your account could not be found.';
     }
 
-    user.name = data.newName;
+    const names = [...this.USERS.values()].map((user) => {
+      return user.name;
+    });
+
+    if (names.includes(name)) {
+      return 'A user already exists with this name. Please choose another one.';
+    }
+
+    user.name = name;
     this.USERS.set(user.id, user);
 
     const messages = [...this.MESSAGES.values()].filter((message) => {
@@ -94,10 +141,10 @@ export class ChatRoom {
       this.MESSAGES.set(message.id, message);
     }
 
-    return true;
+    return messages;
   }
 
-  updateUserColour(data: ColourChange): boolean | string {
+  updateUserColour(data: ColourChange): Message[] | string {
     let colour = data.newColour.trim();
 
     if (colour.length < 1) {
@@ -111,9 +158,9 @@ export class ChatRoom {
 
     colour = isColourValid(colour);
     if (colour.length === 0) {
-      return 'Invalid colour.';
+      return 'You entered an invalid colour.';
     } else if (colour === '#FFFFFF') {
-      return 'Colour cannot be white.';
+      return 'You cannot use the colour white.';
     }
 
     user.colour = colour;
@@ -128,7 +175,7 @@ export class ChatRoom {
       this.MESSAGES.set(message.id, message);
     }
 
-    return true;
+    return messages;
   }
 
   getAllUsers(): User[] {

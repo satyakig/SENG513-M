@@ -38,6 +38,7 @@ export const memberStyles = ({ palette }: Theme) =>
       paddingBottom: '5px',
     },
     itemText: {
+      wordBreak: 'break-all',
       margin: 0,
       '& span': {
         fontWeight: (props: StyleProp) => (props.isThisUser ? 500 : 'normal'),

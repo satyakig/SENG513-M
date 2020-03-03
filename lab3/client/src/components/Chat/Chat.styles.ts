@@ -31,17 +31,20 @@ export const chatStyles = () =>
       display: 'flex',
       flexDirection: 'row',
     },
-
     textCell: {
       flexGrow: 1,
     },
     textBox: {
       margin: 0,
+      '& div': {
+        borderRadius: 0,
+      },
     },
     buttonCell: {
       flexBasis: '80px',
     },
     buttonIcon: {
+      borderRadius: '0 !important',
       width: '100%',
       height: '100%',
       padding: 0,

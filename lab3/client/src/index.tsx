@@ -31,7 +31,7 @@ const reducer: Reducer<ReduxState, any> = combinedReducer;
 const store: Store = createStore(reducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 const render = (Component: any): void => {
-  Socket.getInstance();
+  // Socket.getInstance();
 
   return ReactDOM.render(
     <ThemeProvider theme={THEME}>

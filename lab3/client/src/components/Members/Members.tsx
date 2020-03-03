@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Avatar,
   Divider,
@@ -31,13 +31,15 @@ const Member = (props: MemberProp): JSX.Element => {
     colour: props.user.colour,
   });
 
-  const timeFrames = ['months', 'weeks', 'hours', 'days', 'minutes', 'seconds'];
+  const [ago, setAgo] = useState('');
 
   function formatDate(): string {
     return moment(props.user.joinedOn).format('MMM D, YYYY');
   }
 
-  function formatAgo(): string {
+  const formatAgo = useCallback(() => {
+    const timeFrames = ['months', 'weeks', 'hours', 'days', 'minutes', 'seconds'];
+
     const now = moment();
     const last = moment(props.user.lastActive);
 
@@ -46,7 +48,7 @@ const Member = (props: MemberProp): JSX.Element => {
 
     for (const frame of timeFrames) {
       period = frame;
-      diff = last.diff(now, frame as unitOfTime.Diff);
+      diff = now.diff(last, frame as unitOfTime.Diff);
 
       if (diff !== 0) {
         break;
@@ -55,8 +57,20 @@ const Member = (props: MemberProp): JSX.Element => {
 
     diff = diff < 1 ? 0 : diff;
 
-    return `${diff} ${period} ago`;
-  }
+    setAgo(`${diff} ${period} ago`);
+  }, [props.user.lastActive]);
+
+  useEffect(() => {
+    formatAgo();
+
+    const interval = setInterval(() => {
+      formatAgo();
+    }, 10000);
+
+    return () => {
+      window.clearInterval(interval);
+    };
+  }, [props.user.lastActive, formatAgo]);
 
   return (
     <ListItem className={classes.listItem}>
@@ -70,9 +84,12 @@ const Member = (props: MemberProp): JSX.Element => {
         primary={props.user.name}
         secondary={
           <React.Fragment>
-            <Typography display="block" component="span" variant="caption">
-              {`Active: ${formatAgo()}`}
-            </Typography>
+            {isThisUser ? null : (
+              <Typography display="block" component="span" variant="caption">
+                {`Active: ${ago}`}
+              </Typography>
+            )}
+
             <Typography display="block" component="span" variant="caption">
               {`Joined: ${formatDate()}`}
             </Typography>

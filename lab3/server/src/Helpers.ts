@@ -10,7 +10,7 @@ import { v4 } from 'uuid';
 import colourString from 'color-string';
 import moment from 'moment';
 import { Socket } from 'socket.io';
-import { SeverityType, User, Notification } from './Models';
+import { SeverityType, Notification } from './Models';
 import { EVENT_TYPES } from './ChatRoom';
 
 const nameConfig: Config = {
@@ -21,7 +21,13 @@ const nameConfig: Config = {
 };
 
 export function randomColour(): string {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+  let colour = colourString.get(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
+
+  while (colour === null || colour === undefined) {
+    colour = colourString.get(`#${Math.floor(Math.random() * 16777215).toString(16)}`);
+  }
+
+  return colourString.to.rgb(colour.value);
 }
 
 export function randomName(): string {
@@ -33,23 +39,18 @@ export function randomId(): string {
 }
 
 export function isColourValid(inp: string): string {
-  const colour = colourString.get(inp);
+  let incColour = inp;
 
-  if (colour !== null && colour !== undefined) {
-    return colourString.to.hex(colour.value);
+  if (!colourString.get(incColour)) {
+    incColour = `#${incColour}`;
+  }
+
+  const newColour = colourString.get(incColour);
+  if (newColour !== null && newColour !== undefined) {
+    return colourString.to.rgb(newColour.value);
   }
 
   return '';
-}
-
-export function makeNewUser(): User {
-  return {
-    id: randomId(),
-    name: randomName(),
-    colour: randomColour(),
-    joinedOn: moment().valueOf(),
-    lastActive: moment().valueOf(),
-  };
 }
 
 export function sendNotification(socket: Socket, message: string, severity: SeverityType) {

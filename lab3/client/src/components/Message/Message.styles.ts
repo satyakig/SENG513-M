@@ -26,7 +26,6 @@ export const messageStyles = ({ palette }: Theme) =>
       flexBasis: '75%',
       display: 'flex',
       flexDirection: 'column',
-      textAlign: 'justify',
       backgroundColor: '#ffffff',
       borderRadius: '10px',
       boxShadow:

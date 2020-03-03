@@ -1,4 +1,5 @@
 import moment from 'moment-timezone';
+import { v4 } from 'uuid';
 
 moment.tz.setDefault(moment.tz.guess());
 
@@ -10,6 +11,8 @@ export interface User {
   colour: string;
   joinedOn: number;
   lastActive: number;
+  active: boolean;
+  typing: boolean;
 }
 
 export interface Message {
@@ -43,7 +46,7 @@ export interface ColourChange {
   id: string;
 }
 
-export interface NewConnection {
+export interface Connection {
   id: string;
 }
 
@@ -52,18 +55,15 @@ export interface StyleProp {
   colour: string;
 }
 
-const ACTIVE_TTL = 15 * 60;
-const TYPING_TTL = 10;
-
 export class UserModel {
   id = '';
   name = '';
   colour = '#000000';
   joinedOn = 0;
   lastActive = 0;
-
   active = false;
   typing = false;
+
   initials = '';
 
   constructor(user?: User) {
@@ -73,9 +73,8 @@ export class UserModel {
       this.colour = user.colour;
       this.joinedOn = user.joinedOn;
       this.lastActive = user.lastActive;
-
-      this.active = moment().unix() - this.lastActive <= ACTIVE_TTL;
-      this.typing = moment().unix() - this.lastActive <= TYPING_TTL;
+      this.active = user.active;
+      this.typing = user.typing;
 
       this.initials = this.name
         .split(' ')
@@ -133,5 +132,14 @@ export class NotificationModel {
       this.timestamp = notification.timestamp;
       this.severity = notification.severity as SeverityType;
     }
+  }
+
+  static generateNotification(message: string, severity: SeverityType): Notification {
+    return {
+      id: v4(),
+      message,
+      timestamp: moment().valueOf(),
+      severity,
+    };
   }
 }

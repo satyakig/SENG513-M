@@ -48,7 +48,7 @@ const Notifications = (): JSX.Element => {
 
   return (
     <div className={classes.container}>
-      {notifications.slice(0, 5).map((notification, index) => {
+      {notifications.slice(0, 4).map((notification, index) => {
         return (
           <CustomSnack
             key={index}

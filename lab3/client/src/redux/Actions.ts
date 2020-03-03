@@ -1,11 +1,14 @@
-import { Message, User } from './Models';
+import { Message, User, Notification } from './Models';
 
 export const ACTION_TYPES = {
   SET_USER: 'SET_USER',
 
   SET_USERS: 'SET_USERS',
+  UPDATE_USERS: 'UPDATE_USERS',
+  ADD_USER: 'ADD_USER',
 
   SET_MESSAGES: 'SET_MESSAGES',
+  UPDATE_MESSAGES: 'UPDATE_MESSAGES',
   ADD_MESSAGE: 'ADD_MESSAGE',
 
   ADD_NOTIFICATION: 'ADD_NOTIFICATION',
@@ -26,9 +29,30 @@ export function setUsersAction(users: User[]) {
   };
 }
 
+export function addUserAction(user: User) {
+  return {
+    type: ACTION_TYPES.ADD_USER,
+    user,
+  };
+}
+
+export function updateUsersAction(users: User[]) {
+  return {
+    type: ACTION_TYPES.UPDATE_USERS,
+    users,
+  };
+}
+
 export function setMessagesAction(messages: Message[]) {
   return {
     type: ACTION_TYPES.SET_MESSAGES,
+    messages,
+  };
+}
+
+export function updateMessagesAction(messages: Message[]) {
+  return {
+    type: ACTION_TYPES.UPDATE_MESSAGES,
     messages,
   };
 }

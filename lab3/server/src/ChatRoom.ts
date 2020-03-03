@@ -73,8 +73,8 @@ export class ChatRoom {
       return 'Name must be at least 1 character.';
     }
 
-    if (name.length > 50) {
-      return 'Name must be under 50 characters.';
+    if (name.length > 20) {
+      return 'Name must be under 20 characters.';
     }
 
     const user = this.getUser(data.id);
@@ -98,14 +98,22 @@ export class ChatRoom {
   }
 
   updateUserColour(data: ColourChange): boolean | string {
+    let colour = data.newColour.trim();
+
+    if (colour.length < 1) {
+      return 'Colour must be at least 1 character.';
+    }
+
     const user = this.getUser(data.id);
     if (!user) {
       return 'Your account could not be found.';
     }
 
-    const colour = isColourValid(data.newColour.trim());
+    colour = isColourValid(colour);
     if (colour.length === 0) {
       return 'Invalid colour.';
+    } else if (colour === '#FFFFFF') {
+      return 'Colour cannot be white.';
     }
 
     user.colour = colour;

@@ -64,9 +64,14 @@ export const headerStyle = () =>
       letterSpacing: 'unset',
       whiteSpace: 'nowrap',
       '&:hover,&:focus': {
-        color: 'inherit',
+        color: roseColor,
         background: 'transparent',
       },
+    },
+    name: {
+      paddingLeft: '5px',
+      textTransform: 'uppercase',
+      fontWeight: 500,
     },
     appResponsive: {
       margin: '20px 10px',
@@ -146,5 +151,18 @@ export const headerStyle = () =>
       paddingRight: '0px',
       paddingLeft: '0',
       ...transition,
+    },
+    barButton: {
+      color: '#FFFFFF',
+      '&:hover': {
+        background: roseColor,
+      },
+    },
+    itemButton: {
+      color: '#FFFFFF',
+      borderRadius: '6px',
+      '&:hover': {
+        background: roseColor,
+      },
     },
   });

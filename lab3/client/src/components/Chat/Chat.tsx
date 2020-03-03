@@ -51,7 +51,6 @@ const Chat = (): JSX.Element => {
           <TextField
             className={classes.textBox}
             placeholder="Type a message..."
-            autoFocus={true}
             fullWidth={true}
             multiline={true}
             variant="outlined"

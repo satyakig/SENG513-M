@@ -29,14 +29,10 @@ const Message = (props: MessageProps) => {
       <Avatar className={classes.icon}>{props.message.byInitials}</Avatar>
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography type="small">
-            <span style={{ textTransform: 'uppercase' }}>
-              {formatDate(props.message.timestamp)}
-            </span>
+          <Typography type="small" className={classes.date}>
+            {formatDate(props.message.timestamp)}
           </Typography>
-          <Typography type="info">
-            <span style={{ fontSize: '1.45em' }}>{props.message.message}</span>
-          </Typography>
+          <Typography>{props.message.message}</Typography>
         </CardContent>
       </div>
     </Card>

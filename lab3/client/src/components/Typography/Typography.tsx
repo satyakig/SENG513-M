@@ -7,9 +7,10 @@ const useStyles = makeStyles(typographyStyle);
 
 interface TypographyProps {
   children?: any;
-  type: 'danger' | 'info' | 'muted' | 'primary' | 'quote' | 'small' | 'success' | 'warning';
-  text?: string;
-  author?: string;
+  type?: 'danger' | 'info' | 'muted' | 'primary' | 'quote' | 'small' | 'success' | 'warning';
+  text?: any;
+  author?: any;
+  className?: any;
 }
 
 const Typography = (props: TypographyProps): JSX.Element => {
@@ -45,7 +46,11 @@ const Typography = (props: TypographyProps): JSX.Element => {
       typeStyle = '';
   }
 
-  const style = classNames(classes.defaultFontStyle, typeStyle);
+  const style = classNames(
+    classes.defaultFontStyle,
+    typeStyle,
+    props.className ? props.className : '',
+  );
 
   if (props.type === 'quote') {
     return (

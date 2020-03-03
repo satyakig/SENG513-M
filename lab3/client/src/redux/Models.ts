@@ -47,19 +47,13 @@ export interface NewConnection {
   id: string;
 }
 
+export interface StyleProp {
+  isThisUser: boolean;
+  colour: string;
+}
+
 const ACTIVE_TTL = 15 * 60;
 const TYPING_TTL = 10;
-
-export interface UserCompType {
-  id: string;
-  name: string;
-  colour: string;
-  joinedOn: number;
-  lastActive: number;
-  active: boolean;
-  typing: boolean;
-  initials: string;
-}
 
 export class UserModel {
   id = '';

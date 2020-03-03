@@ -2,45 +2,109 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
-import Hidden from '@material-ui/core/Hidden';
-import Drawer from '@material-ui/core/Drawer';
+import {
+  AppBar,
+  Toolbar,
+  List,
+  IconButton,
+  Hidden,
+  Drawer,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Dialog,
+  DialogContent,
+  Slide,
+  DialogActions,
+  Button,
+} from '@material-ui/core';
 import Menu from '@material-ui/icons/Menu';
+import PaletteIcon from '@material-ui/icons/Palette';
+import GroupIcon from '@material-ui/icons/Group';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { useSelector } from 'react-redux';
 import { headerStyle } from './Header.styles';
+import Members from '../Members/Members';
 
 const useStyles = makeStyles(headerStyle);
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 const Header = (props) => {
   const classes = useStyles();
+  const user = useSelector((state) => {
+    return state.currentUser;
+  });
+
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [membersOpen, setMembersOpen] = useState(false);
 
-  const handleDrawerToggle = () => {
+  function handleMembersClose() {
+    setMembersOpen(false);
+  }
+
+  function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
-  };
+  }
 
-  const { color, rightLinks, brand, fixed, absolute } = props;
+  function nameClick() {}
+
+  function colourClick() {}
+
+  function membersClick() {
+    setMobileOpen(false);
+    setMembersOpen(true);
+  }
+
+  const { color } = props;
 
   const appBarClasses = classNames({
     [classes.appBar]: true,
     [classes[color]]: color,
-    [classes.absolute]: absolute,
-    [classes.fixed]: fixed,
+    [classes.absolute]: false,
+    [classes.fixed]: false,
   });
+
+  const title = user.name ? (
+    <span className={classes.title}>
+      513 Chat <span className={classes.name}>{user.name}</span>
+    </span>
+  ) : (
+    <span className={classes.title}>513 Chat</span>
+  );
 
   return (
     <AppBar className={appBarClasses} style={{ borderRadius: 0 }}>
+      <Dialog
+        open={membersOpen}
+        TransitionComponent={Transition}
+        keepMounted={true}
+        onClose={handleMembersClose}
+        fullWidth={true}
+      >
+        <DialogContent>
+          <Members />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleMembersClose} color="secondary">
+            Close
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Toolbar className={classes.container}>
-        <span className={classes.title}>{brand}</span>
+        {title}
         <Hidden smDown={true} implementation="css">
-          <span className={classes.title}>{brand}</span>
-          <span className={classes.title}>{brand}</span>
-          <span className={classes.title}>{brand}</span>
-          <span className={classes.title}>{brand}</span>
+          <IconButton className={classes.barButton} onClick={nameClick}>
+            <AccountCircleIcon />
+          </IconButton>
+          <IconButton className={classes.barButton} onClick={colourClick}>
+            <PaletteIcon />
+          </IconButton>
         </Hidden>
         <Hidden mdUp={true}>
-          <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerToggle}>
+          <IconButton color="inherit" onClick={handleDrawerToggle}>
             <Menu />
           </IconButton>
         </Hidden>
@@ -56,10 +120,26 @@ const Header = (props) => {
           onClose={handleDrawerToggle}
         >
           <div className={classes.appResponsive}>
-            <span className={classes.title}>{brand}</span>
-            <span className={classes.title}>{brand}</span>
-            <span className={classes.title}>{brand}</span>
-            <span className={classes.title}>{brand}</span>
+            <List>
+              <ListItem button={true} className={classes.itemButton} onClick={membersClick}>
+                <ListItemIcon className={classes.itemButton}>
+                  <GroupIcon />
+                </ListItemIcon>
+                <ListItemText primary="Members" />
+              </ListItem>
+              <ListItem button={true} className={classes.itemButton} onClick={nameClick}>
+                <ListItemIcon className={classes.itemButton}>
+                  <AccountCircleIcon />
+                </ListItemIcon>
+                <ListItemText primary="Update Name" />
+              </ListItem>
+              <ListItem button={true} className={classes.itemButton} onClick={colourClick}>
+                <ListItemIcon className={classes.itemButton}>
+                  <PaletteIcon />
+                </ListItemIcon>
+                <ListItemText primary="Update Colour" />
+              </ListItem>
+            </List>
           </div>
         </Drawer>
       </Hidden>
@@ -83,10 +163,6 @@ Header.propTypes = {
     'rose',
     'dark',
   ]),
-  rightLinks: PropTypes.node,
-  brand: PropTypes.string,
-  fixed: PropTypes.bool,
-  absolute: PropTypes.bool,
 };
 
 export default Header;

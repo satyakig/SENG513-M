@@ -12,9 +12,13 @@ export function userReducer(state: UserModel = new UserModel(), action: AnyActio
 
 export function usersReducer(state: UserModel[] = [], action: AnyAction): UserModel[] {
   if (action.type === ACTION_TYPES.SET_USERS) {
-    return action.users.map((user: User) => {
-      return new UserModel(user);
-    });
+    return action.users
+      .map((user: User) => {
+        return new UserModel(user);
+      })
+      .sort((a: UserModel, b: UserModel) => {
+        return a.name.localeCompare(b.name);
+      });
   }
 
   return state;
@@ -45,7 +49,11 @@ export function notificationReducer(
   action: AnyAction,
 ): NotificationModel[] {
   if (action.type === ACTION_TYPES.ADD_NOTIFICATION) {
-    return state.concat([new NotificationModel(action.notification)]);
+    return state
+      .concat([new NotificationModel(action.notification)])
+      .sort((a: NotificationModel, b: NotificationModel) => {
+        return a.timestamp - b.timestamp;
+      });
   } else if (action.type === ACTION_TYPES.REMOVE_NOTIFICATION) {
     return state.filter((notification) => {
       return notification.id !== action.notificationId;

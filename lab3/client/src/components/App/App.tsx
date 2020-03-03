@@ -13,7 +13,7 @@ const useStyles = makeStyles(appStyles);
 
 const App = (): JSX.Element => {
   const classes = useStyles();
-  const mobile = useMediaQuery(useTheme().breakpoints.down('xs'));
+  const mobile = useMediaQuery(useTheme().breakpoints.down('sm'));
 
   const user = useSelector((state: ReduxState) => {
     return state.currentUser;
@@ -21,7 +21,7 @@ const App = (): JSX.Element => {
 
   return (
     <div>
-      <Header color="dark" brand="Chat Room" fixed={false} absolute={false} />
+      <Header color="dark" />
       <Notifications />
       {mobile ? (
         <Grid className={classes.main} container={true}>

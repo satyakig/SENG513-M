@@ -1,11 +1,12 @@
 import { createStyles, Theme } from '@material-ui/core';
-import { UserCompType } from 'redux/Models';
+import { StyleProp } from 'redux/Models';
 
 export const membersStyles = () =>
   createStyles({
     friends: {
       position: 'relative',
       height: 'calc(100vh - 70px)',
+      maxHeight: '100%',
       overflowY: 'auto',
       overflowX: 'hidden',
       paddingTop: '16px !important',
@@ -22,7 +23,7 @@ export const membersStyles = () =>
       textTransform: 'uppercase',
     },
     listItem: {
-      paddingTop: '0',
+      paddingTop: '5px',
       paddingBottom: '5px',
     },
     itemText: {
@@ -33,16 +34,18 @@ export const membersStyles = () =>
 export const memberStyles = ({ palette }: Theme) =>
   createStyles({
     listItem: {
-      paddingTop: '0',
+      paddingTop: '5px',
       paddingBottom: '5px',
     },
     itemText: {
       margin: 0,
+      '& span': {
+        fontWeight: (props: StyleProp) => (props.isThisUser ? 500 : 'normal'),
+      },
     },
     avatar: {
-      fontWeight: 500,
-
-      color: (props: UserCompType) => palette.getContrastText(props.colour),
-      backgroundColor: (props: UserCompType) => props.colour,
+      fontWeight: (props: StyleProp) => (props.isThisUser ? 500 : 'normal'),
+      color: (props: StyleProp) => palette.getContrastText(props.colour),
+      backgroundColor: (props: StyleProp) => props.colour,
     },
   });

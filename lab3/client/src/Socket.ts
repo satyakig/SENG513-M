@@ -1,8 +1,6 @@
 import io from 'socket.io-client';
-import { ThunkAction } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import Cookies from 'js-cookie';
-import { ReduxState } from './redux/combinedReducer';
 import {
   ColourChange,
   Message,

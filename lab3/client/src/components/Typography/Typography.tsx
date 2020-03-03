@@ -6,7 +6,7 @@ import { typographyStyle } from './Typography.styles';
 const useStyles = makeStyles(typographyStyle);
 
 interface TypographyProps {
-  children?: JSX.Element;
+  children?: any;
   type: 'danger' | 'info' | 'muted' | 'primary' | 'quote' | 'small' | 'success' | 'warning';
   text?: string;
   author?: string;

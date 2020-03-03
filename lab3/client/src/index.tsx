@@ -12,7 +12,7 @@ import { THEME } from 'styles/material-kit-react';
 import 'styles/material-kit-react.scss';
 
 import App from 'components/App/App';
-import { Socket } from './socket';
+import { Socket } from './Socket';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loggerMiddleware = createLogger({
@@ -31,7 +31,7 @@ const reducer: Reducer<ReduxState, any> = combinedReducer;
 const store: Store = createStore(reducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 const render = (Component: any): void => {
-  Socket.setup();
+  Socket.getInstance();
 
   return ReactDOM.render(
     <ThemeProvider theme={THEME}>
@@ -57,3 +57,5 @@ if (module.hot && isDev) {
     render(NextApp);
   });
 }
+
+export const STORE = store;

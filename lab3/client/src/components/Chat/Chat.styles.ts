@@ -15,9 +15,9 @@ export const chatStyles = () =>
       display: 'flex',
       flexDirection: 'column',
     },
-    messagesRow: {},
     messages: {
       flexGrow: 1,
+      display: 'flex',
       flexDirection: 'column-reverse',
       overflowY: 'auto',
       height: '100%',

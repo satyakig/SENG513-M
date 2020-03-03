@@ -1,7 +1,7 @@
 import { createStyles, Theme } from '@material-ui/core';
-import { deepOrange, deepPurple } from '@material-ui/core/colors';
+import { UserCompType } from 'redux/Models';
 
-export const friendsStyles = ({ palette }: Theme) =>
+export const membersStyles = () =>
   createStyles({
     friends: {
       position: 'relative',
@@ -21,7 +21,6 @@ export const friendsStyles = ({ palette }: Theme) =>
       fontWeight: 600,
       textTransform: 'uppercase',
     },
-
     listItem: {
       paddingTop: '0',
       paddingBottom: '5px',
@@ -29,12 +28,21 @@ export const friendsStyles = ({ palette }: Theme) =>
     itemText: {
       margin: 0,
     },
-    orange: {
-      color: palette.getContrastText(deepOrange[500]),
-      backgroundColor: deepOrange[500],
+  });
+
+export const memberStyles = ({ palette }: Theme) =>
+  createStyles({
+    listItem: {
+      paddingTop: '0',
+      paddingBottom: '5px',
     },
-    purple: {
-      color: palette.getContrastText(deepPurple[500]),
-      backgroundColor: deepPurple[500],
+    itemText: {
+      margin: 0,
+    },
+    avatar: {
+      fontWeight: 500,
+
+      color: (props: UserCompType) => palette.getContrastText(props.colour),
+      backgroundColor: (props: UserCompType) => props.colour,
     },
   });

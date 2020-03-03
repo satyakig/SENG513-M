@@ -1,3 +1,5 @@
+import { Message, User } from './Models';
+
 export const ACTION_TYPES = {
   SET_USER: 'SET_USER',
 
@@ -10,35 +12,35 @@ export const ACTION_TYPES = {
   REMOVE_NOTIFICATION: 'REMOVE_NOTIFICATION',
 };
 
-export function setUserAction(user: any) {
+export function setUserAction(user: User) {
   return {
     type: ACTION_TYPES.SET_USER,
     user,
   };
 }
 
-export function setUsersAction(users: any[]) {
+export function setUsersAction(users: User[]) {
   return {
     type: ACTION_TYPES.SET_USERS,
     users,
   };
 }
 
-export function setMessagesAction(messages: any[]) {
+export function setMessagesAction(messages: Message[]) {
   return {
     type: ACTION_TYPES.SET_MESSAGES,
     messages,
   };
 }
 
-export function addMessageAction(message: any) {
+export function addMessageAction(message: Message) {
   return {
     type: ACTION_TYPES.ADD_MESSAGE,
     message,
   };
 }
 
-export function addNotificationAction(notification: any) {
+export function addNotificationAction(notification: Notification) {
   return {
     type: ACTION_TYPES.ADD_NOTIFICATION,
     notification,

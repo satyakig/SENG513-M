@@ -1,32 +1,27 @@
 import React from 'react';
-import { createStyles, Grid, makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
+import { Grid, makeStyles, useTheme, useMediaQuery } from '@material-ui/core';
 import Header from '../Header/Header';
-import './App.scss';
-import Friends from '../Friends/Friends';
+import Members from '../Members/Members';
 import Chat from '../Chat/Chat';
 import Notifications from '../Notifications/Notifications';
+import { appStyles } from './App.styles';
+import { useSelector } from 'react-redux';
+import { ReduxState } from 'redux/combinedReducer';
+import './App.scss';
 
-const landingPageStyle = () =>
-  createStyles({
-    main: {
-      margin: '0',
-      width: '100%',
-      height: 'calc(100vh - 70px)',
-      overflow: 'hidden',
-      boxShadow:
-        '0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)',
-    },
-  });
-
-const useStyles = makeStyles(landingPageStyle);
+const useStyles = makeStyles(appStyles);
 
 const App = (): JSX.Element => {
   const classes = useStyles();
   const mobile = useMediaQuery(useTheme().breakpoints.down('xs'));
 
+  const user = useSelector((state: ReduxState) => {
+    return state.currentUser;
+  });
+
   return (
     <div>
-      <Header color="dark" brand="Satyaki Ghosh" fixed={false} absolute={false} />
+      <Header color="dark" brand="Chat Room" fixed={false} absolute={false} />
       <Notifications />
       {mobile ? (
         <Grid className={classes.main} container={true}>
@@ -37,7 +32,7 @@ const App = (): JSX.Element => {
       ) : (
         <Grid className={classes.main} container={true}>
           <Grid item={true} xs={3}>
-            <Friends />
+            <Members />
           </Grid>
           <Grid item={true} xs={9}>
             <Chat />

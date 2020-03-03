@@ -1,33 +1,35 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { makeStyles, Snackbar } from '@material-ui/core';
 import MuiAlert from '@material-ui/lab/Alert';
+import { useDispatch, useSelector } from 'react-redux';
+import { ReduxState } from 'redux/combinedReducer';
 import { notificationStyles } from './Notifications.styles';
+import { removeNotificationAction } from '../../redux/Actions';
 
 const useStyles = makeStyles(notificationStyles);
 
 interface CustomSnackProps {
   message: string;
   severity: 'success' | 'info' | 'warning' | 'error' | undefined;
-  id: number;
+  id: string;
 }
 
 const CustomSnack = (props: CustomSnackProps): JSX.Element => {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
     if (reason === 'clickaway') {
       return;
     }
 
-    setOpen(false);
+    dispatch(removeNotificationAction(props.id));
   };
 
   return (
     <Snackbar
-      open={open}
+      open={true}
       onClose={handleClose}
-      autoHideDuration={10000}
       anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       className={classes.notification}
     >
@@ -40,11 +42,22 @@ const CustomSnack = (props: CustomSnackProps): JSX.Element => {
 
 const Notifications = (): JSX.Element => {
   const classes = useStyles();
+  const notifications = useSelector((state: ReduxState) => {
+    return state.notifications;
+  });
 
   return (
     <div className={classes.container}>
-      <CustomSnack id={0} severity="warning" message="One" />
-      <CustomSnack id={1} severity="success" message="Contrary to popular belief" />
+      {notifications.slice(0, 5).map((notification, index) => {
+        return (
+          <CustomSnack
+            key={index}
+            id={notification.id}
+            severity={notification.severity}
+            message={notification.message}
+          />
+        );
+      })}
     </div>
   );
 };

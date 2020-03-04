@@ -35,7 +35,7 @@ const Chat = (): JSX.Element => {
     setMessage(event.target.value);
   }
 
-  function submit() {
+  const submit = useCallback(() => {
     if (message.startsWith(SLASH)) {
       const newMessage = message.trim();
 
@@ -44,7 +44,7 @@ const Chat = (): JSX.Element => {
         Socket.getInstance().colourChange(colour);
       } else if (newMessage.startsWith(`${NICK_COLOUR} `)) {
         const colour = newMessage.split(NICK_COLOUR)[1].trim();
-        Socket.getInstance().newMessage(colour);
+        Socket.getInstance().colourChange(colour);
       } else if (newMessage.startsWith(`${NICK} `)) {
         const name = newMessage.split(NICK)[1].trim();
         Socket.getInstance().nameChange(name);
@@ -57,14 +57,10 @@ const Chat = (): JSX.Element => {
       }
     } else if (message.length > 0) {
       Socket.getInstance().newMessage(message);
-    } else {
-      dispatch(
-        addNotificationAction(NotificationModel.generateNotification('Empty message.', 'warning')),
-      );
     }
 
     setMessage('');
-  }
+  }, [dispatch, message]);
 
   const keyPress = useCallback(
     (event: KeyboardEvent) => {

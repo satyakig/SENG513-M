@@ -31,7 +31,7 @@ const reducer: Reducer<ReduxState, any> = combinedReducer;
 const store: Store = createStore(reducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 const render = (Component: any): void => {
-  // Socket.getInstance();
+  Socket.getInstance();
 
   return ReactDOM.render(
     <ThemeProvider theme={THEME}>
@@ -44,18 +44,5 @@ const render = (Component: any): void => {
 };
 
 render(App);
-
-if (module.hot && isDev) {
-  module.hot.accept('redux/combinedReducer', () => {
-    store.replaceReducer(reducer);
-  });
-}
-
-if (module.hot && isDev) {
-  module.hot.accept('components/App/App', () => {
-    const NextApp = require('components/App/App').default;
-    render(NextApp);
-  });
-}
 
 export const STORE = store;

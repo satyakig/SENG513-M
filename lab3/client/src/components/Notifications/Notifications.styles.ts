@@ -16,7 +16,7 @@ export const notificationStyles = () =>
       top: 0,
       position: 'relative',
       marginBottom: '10px',
-      maxWidth: '50%',
+      maxWidth: '75%',
       left: '50%',
       transform: 'translateX(-50%)',
     },

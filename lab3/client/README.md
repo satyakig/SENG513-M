@@ -21,8 +21,8 @@ This project was created with [Create React App](https://github.com/facebook/cre
 
 ### Dependencies
 
-1. Socket.IO
-   - [socket.io](https://www.npmjs.com/package/socket.io)
+1. Socket.IO Client
+   - [socket.io-client](https://www.npmjs.com/package/socket.io-client)
 1. React and its dependencies
    - [react](https://www.npmjs.com/package/react)
    - [react-app-polyfill](https://www.npmjs.com/package/react-app-polyfill)
@@ -33,11 +33,18 @@ This project was created with [Create React App](https://github.com/facebook/cre
    - [react-redux](https://www.npmjs.com/package/react-redux)
    - [redux-logger](https://www.npmjs.com/package/redux-logger)
    - [redux-thunk](https://www.npmjs.com/package/redux-thunk)
-1. Moment
+1. Moment Timezone (Library for date objects)
    - [moment-timezone](https://www.npmjs.com/package/moment-timezone)
-1. Bootstrap
-   - [bootstrap](https://www.npmjs.com/package/bootstrap)
-   - [react-bootstrap](https://www.npmjs.com/package/react-bootstrap)
+1. Material-UI components and styles
+   - [@material-ui/core](https://www.npmjs.com/package/@material-ui/core)
+   - [@material-ui/icons](https://www.npmjs.com/package/@material-ui/icons)
+   - [@material-ui/lab](https://www.npmjs.com/package/@material-ui/lab)
+   - [Material React Kit](https://demos.creative-tim.com/material-kit-react/#/documentation/tutorial)
+   - [classnames](https://www.npmjs.com/package/classnames)
+1. uuid (Unique ID generation)
+   - [uuid](https://www.npmjs.com/package/uuid)
+1. JS Cookie
+   - [js-cookie](https://www.npmjs.com/package/js-cookie)
 1. Code style linters (ESLint, Prettier, Stylelint) and their dependencies
    - [eslint](https://www.npmjs.com/package/eslint)
    - [prettier](https://www.npmjs.com/package/prettier)

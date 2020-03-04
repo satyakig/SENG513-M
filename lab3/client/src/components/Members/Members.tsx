@@ -100,8 +100,12 @@ const Member = (props: MemberProp): JSX.Element => {
   );
 };
 
-const Members = (): JSX.Element => {
-  const classes = membersStylesComp();
+export interface MembersProp {
+  mobile: boolean;
+}
+
+const Members = (props: MembersProp): JSX.Element => {
+  const classes = membersStylesComp(props);
 
   const currentUser = useSelector((state: ReduxState) => {
     return state.currentUser;
@@ -160,10 +164,10 @@ const Members = (): JSX.Element => {
           }
         />
       </ListItem>
+      <Divider />
       {inactiveMembers.map((user, index) => {
         return <Member key={index} thisUser={currentUser} user={user} />;
       })}
-      <Divider />
     </List>
   );
 };

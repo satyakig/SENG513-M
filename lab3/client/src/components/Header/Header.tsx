@@ -149,7 +149,7 @@ const Header = (props: HeaderProps) => {
         fullWidth={true}
       >
         <DialogContent>
-          <Members />
+          <Members mobile={true} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleMembersClose} color="secondary">

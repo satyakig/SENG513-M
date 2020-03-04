@@ -1,5 +1,5 @@
-import { Message, MessageModel, NotificationModel, User, UserModel } from './Models';
 import { AnyAction } from 'redux';
+import { Message, MessageModel, NotificationModel, User, UserModel } from './Models';
 import { ACTION_TYPES } from './Actions';
 
 export function userReducer(state: UserModel = new UserModel(), action: AnyAction): UserModel {
@@ -40,7 +40,19 @@ export function usersReducer(state: UserModel[] = [], action: AnyAction): UserMo
         return a.name.localeCompare(b.name);
       });
   } else if (action.type === ACTION_TYPES.ADD_USER) {
-    return state.concat([new UserModel(action.user)]).sort((a: UserModel, b: UserModel) => {
+    const newUser = new UserModel(action.user);
+
+    const findUserIndex = state.findIndex((user: UserModel) => {
+      return user.id === newUser.id;
+    });
+
+    if (findUserIndex > -1) {
+      state.splice(findUserIndex, 1, newUser);
+    } else {
+      state.push(newUser);
+    }
+
+    return [...state].sort((a: UserModel, b: UserModel) => {
       return a.name.localeCompare(b.name);
     });
   }
@@ -78,11 +90,21 @@ export function messagesReducer(state: MessageModel[] = [], action: AnyAction): 
         return b.timestamp - a.timestamp;
       });
   } else if (action.type === ACTION_TYPES.ADD_MESSAGE) {
-    return state
-      .concat([new MessageModel(action.message)])
-      .sort((a: MessageModel, b: MessageModel) => {
-        return b.timestamp - a.timestamp;
-      });
+    const newMessage = new MessageModel(action.message);
+
+    const findMessageIndex = state.findIndex((message: MessageModel) => {
+      return message.id === newMessage.id;
+    });
+
+    if (findMessageIndex > -1) {
+      state.splice(findMessageIndex, 1, newMessage);
+    } else {
+      state.push(newMessage);
+    }
+
+    return [...state].sort((a: MessageModel, b: MessageModel) => {
+      return b.timestamp - a.timestamp;
+    });
   }
 
   return state;

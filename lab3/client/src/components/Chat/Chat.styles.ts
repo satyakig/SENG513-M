@@ -5,8 +5,9 @@ const rowHeight = '97px';
 export const chatStyles = () =>
   createStyles({
     chat: {
-      position: 'relative',
-      height: 'calc(100vh - 71px)',
+      maxHeight: 'calc(100vh - 71px)',
+      height: '100%',
+      flexGrow: 1,
       marginBottom: '1px',
       overflowY: 'hidden',
       overflowX: 'hidden',
@@ -22,7 +23,8 @@ export const chatStyles = () =>
       overflowY: 'auto',
       height: '100%',
       maxHeight: '100%',
-      padding: '15px',
+      padding: '0 15px',
+      margin: '15px 0',
     },
     textRow: {
       minHeight: `${rowHeight}`,

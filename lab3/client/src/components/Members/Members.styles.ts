@@ -1,11 +1,12 @@
 import { createStyles, Theme } from '@material-ui/core';
 import { StyleProp } from 'redux/Models';
+import { MembersProp } from './Members';
 
 export const membersStyles = () =>
   createStyles({
     friends: {
       position: 'relative',
-      height: 'calc(100vh - 70px)',
+      height: (prop: MembersProp) => (prop.mobile ? 'auto' : 'calc(100vh - 70px)'),
       maxHeight: '100%',
       overflowY: 'auto',
       overflowX: 'hidden',

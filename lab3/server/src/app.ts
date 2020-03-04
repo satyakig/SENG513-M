@@ -2,14 +2,12 @@ import express from 'express';
 import { Server } from 'http';
 import socketIo from 'socket.io';
 import cors from 'cors';
-import morgan from 'morgan';
 import { ChatRoom, EVENT_TYPES } from './ChatRoom';
 import { ColourChange, Connection, NameChange, SendMessage, User } from './Models';
 import { sendNotification } from './Helpers';
 
 const app = express();
 app.use(cors());
-app.use(morgan('dev'));
 
 const httpServer = new Server(app);
 const io = socketIo(httpServer);
@@ -71,7 +69,7 @@ io.on('connection', (socket) => {
       sendNotification(socket, 'Your name has been updated.', 'success');
       socket.emit(EVENT_TYPES.USER, user);
       io.emit(EVENT_TYPES.UPDATE_MESSAGES, resp);
-      socket.broadcast.emit(EVENT_TYPES.UPDATE_USERS, [user]);
+      io.emit(EVENT_TYPES.UPDATE_USERS, [user]);
     }
   });
 
@@ -88,7 +86,7 @@ io.on('connection', (socket) => {
       sendNotification(socket, `Your colour has been updated to ${user.colour}.`, 'success');
       socket.emit(EVENT_TYPES.USER, user);
       io.emit(EVENT_TYPES.UPDATE_MESSAGES, resp);
-      socket.broadcast.emit(EVENT_TYPES.UPDATE_USERS, [user]);
+      io.emit(EVENT_TYPES.UPDATE_USERS, [user]);
     }
   });
 

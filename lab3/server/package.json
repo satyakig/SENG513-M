@@ -9,8 +9,7 @@
   ],
   "main": "app.js",
   "engines": {
-    "node": "12.x.x",
-    "npm": "6.x.x"
+    "node": "12.x.x"
   },
   "scripts": {
     "start": "node ./app.js",
@@ -19,11 +18,12 @@
   },
   "dependencies": {
     "color-string": "1.5.3",
+    "cors": "2.8.5",
     "express": "4.17.1",
     "moment": "2.24.0",
     "socket.io": "2.3.0",
     "unique-names-generator": "4.2.0",
-    "uuid": "7.0.1"
+    "uuid": "7.0.2"
   },
   "devDependencies": {
     "@types/color-string": "1.5.0",

@@ -7,6 +7,7 @@ import { ColourChange, Connection, NameChange, SendMessage, User } from './Model
 import { sendNotification } from './Helpers';
 
 const app = express();
+
 app.use(cors());
 
 const httpServer = new Server(app);

@@ -59,8 +59,6 @@ export class Socket {
     this.socket = io(this.URL);
 
     this.socket.on('connect', () => {
-      console.debug('connected to server');
-
       const data: Connection = {
         id: this.cookie ? this.cookie : '',
       };
@@ -103,7 +101,16 @@ export class Socket {
     });
 
     this.socket.on('disconnect', () => {
-      console.debug('disconnected from server');
+      const data: User = {
+        id: this.user.id,
+        name: this.user.name,
+        colour: this.user.colour,
+        joinedOn: this.user.joinedOn,
+        lastActive: this.user.lastActive,
+        active: false,
+        typing: false,
+      };
+      this.generateAction(setUserAction(data));
     });
   }
 

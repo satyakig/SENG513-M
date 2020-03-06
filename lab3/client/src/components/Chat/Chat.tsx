@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { TextField, makeStyles } from '@material-ui/core';
+import { animateScroll } from 'react-scroll';
 import TelegramIcon from '@material-ui/icons/Telegram';
 import { Socket } from 'Socket';
 import { useDispatch, useSelector } from 'react-redux';
@@ -72,6 +73,15 @@ const Chat = (): JSX.Element => {
   );
 
   useEffect(() => {
+    animateScroll.scrollToBottom({
+      containerId: 'messageBoxScroll',
+      smooth: true,
+      duration: 150,
+      isDynamic: true,
+    });
+  }, [messages]);
+
+  useEffect(() => {
     document.addEventListener('keyup', keyPress, false);
 
     return () => {
@@ -81,10 +91,12 @@ const Chat = (): JSX.Element => {
 
   return (
     <div className={classes.chat}>
-      <div className={classes.messages}>
-        {messages.map((message, index) => {
-          return <Message key={index} message={message} user={user} />;
-        })}
+      <div className={classes.layer} id="messageBoxScroll">
+        <div className={classes.messages}>
+          {messages.map((message, index) => {
+            return <Message key={index} message={message} user={user} />;
+          })}
+        </div>
       </div>
       <div className={classes.textRow}>
         <div className={classes.textCell}>

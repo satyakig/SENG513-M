@@ -187,8 +187,7 @@ export class ChatRoom {
   }
 
   reset(): void {
-    this.USERS = new Map();
-    this.MESSAGES = new Map();
+    ChatRoom.instance = new ChatRoom();
   }
 
   static getInstance(): ChatRoom {

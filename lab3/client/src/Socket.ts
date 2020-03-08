@@ -68,6 +68,7 @@ export class Socket {
 
     this.socket.on(EVENT_TYPES.USER, (data: User) => {
       Cookies.set(USER_ID, data.id);
+      this.cookie = Cookies.get(USER_ID);
       this.user = new UserModel(data);
       this.generateAction(setUserAction(data));
     });
@@ -81,6 +82,13 @@ export class Socket {
     });
 
     this.socket.on(EVENT_TYPES.NOTIFICATION, (data: Notification) => {
+      if (data.message.includes('account could not be found')) {
+        Cookies.remove(USER_ID);
+        this.cookie = Cookies.get(USER_ID);
+        this.user = new UserModel();
+        this.socket.emit(EVENT_TYPES.NEW_CONNECTION, { id: '' });
+      }
+
       this.generateAction(addNotificationAction(data));
     });
 

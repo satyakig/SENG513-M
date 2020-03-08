@@ -14,13 +14,12 @@ import 'styles/material-kit-react.scss';
 import App from 'components/App/App';
 import { Socket } from './Socket';
 
-const isDev = process.env.NODE_ENV === 'development';
 const loggerMiddleware = createLogger({
   collapsed: (getState, action, logEntry?: LogEntryObject) => {
     return (logEntry as LogEntryObject) && !(logEntry as LogEntryObject).error;
   },
   predicate: () => {
-    return isDev;
+    return true;
   },
   duration: true,
   timestamp: false,

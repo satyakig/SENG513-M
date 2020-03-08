@@ -4,7 +4,7 @@
 - TUTORIAL: B02
 - NAME: Satyaki Ghosh
 - ID: 10077685
-- URL: https://lab2-seng513.web.app/
+- URL: https://lab2-seng-513.web.app/
 - BROWSERS: Chrome, Firefox
 
 <br />

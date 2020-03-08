@@ -1,21 +1,21 @@
 {
   "projects": {
-    "default": "seng513-labs"
+    "default": "seng513-c2526"
   },
   "targets": {
-    "seng513-labs": {
+    "seng513-c2526": {
       "hosting": {
         "lab3": [
-          "lab3-seng513"
+          "lab3-seng-513"
         ],
         "lab2": [
-          "lab2-seng513"
+          "lab2-seng-513"
         ],
         "lab1": [
-          "lab1-seng513"
+          "lab1-seng-513"
         ],
         "default": [
-          "seng513-labs"
+          "seng513-c2526"
         ]
       }
     }

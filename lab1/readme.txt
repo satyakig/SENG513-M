@@ -4,6 +4,6 @@ ASSIGNMENT: 1
 
 NAME: Satyaki Ghosh
 ID: 10077685
-URL: https://seng513-labs.web.app/
+URL: https://lab1-seng-513.web.app/
 
 BROWSERS: Chrome, Firefox

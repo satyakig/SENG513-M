@@ -48,7 +48,7 @@ export class Socket {
   readonly URL =
     process.env.NODE_ENV === 'development'
       ? 'http://localhost:3001'
-      : 'https://seng513-labs.appspot.com';
+      : 'https://seng513-c2526.appspot.com';
 
   private cookie = Cookies.get(USER_ID);
   private socket: SocketIOClient.Socket;

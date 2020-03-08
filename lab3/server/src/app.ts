@@ -117,7 +117,6 @@ io.on('connection', (socket) => {
   });
 });
 
-// Startup Server
 const PORT = process.env.PORT || 3001;
 httpServer.listen(PORT, () => {
   ChatRoom.getInstance();

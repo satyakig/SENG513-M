@@ -24,7 +24,7 @@ export const messageStyles = ({ palette }: Theme) =>
       backgroundColor: (props: StyleProp) => props.colour,
     },
     details: {
-      flexBasis: '75%',
+      flexBasis: 'calc(100% - 45px)',
       display: 'flex',
       flexDirection: 'column',
       backgroundColor: '#ffffff',
@@ -33,8 +33,8 @@ export const messageStyles = ({ palette }: Theme) =>
         '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',
     },
     content: {
-      width: 'auto',
-      padding: '10px 10px 10px 15px !important',
+      padding: '10px 15px !important',
+      wordBreak: 'break-word',
       margin: (props: StyleProp) => (props.isThisUser ? '0 0 0 auto' : '0 auto 0 0'),
     },
     cover: {

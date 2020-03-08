@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import moment from 'moment-timezone';
 import { Avatar, makeStyles, Card, CardContent } from '@material-ui/core';
 import { MessageModel, UserModel } from 'redux/Models';
@@ -24,13 +25,18 @@ const Message = (props: MessageProps) => {
     return moment(inp).format('h:mm:ssa MMM D, YYYY');
   }
 
+  const csNames = classNames(classes.card, 'MESSAGE_ID');
+
   return (
-    <Card className={classes.card}>
+    <Card className={csNames}>
       <Avatar className={classes.icon}>{props.message.byInitials}</Avatar>
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography type="small" className={classes.date}>
             {formatDate(props.message.timestamp)}
+          </Typography>
+          <Typography type="small" className={classes.date}>
+            {props.message.byName}
           </Typography>
           <Typography>{props.message.message}</Typography>
         </CardContent>

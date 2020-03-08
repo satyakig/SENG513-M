@@ -3,7 +3,7 @@ import { createStyles, Theme } from '@material-ui/core';
 export const appStyles = ({ zIndex }: Theme) =>
   createStyles({
     main: {
-      margin: '0',
+      margin: 0,
       width: '100%',
       height: 'calc(100vh - 70px)',
       overflow: 'hidden',

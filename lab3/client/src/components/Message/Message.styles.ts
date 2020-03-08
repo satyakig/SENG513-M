@@ -4,7 +4,8 @@ import { StyleProp } from 'redux/Models';
 export const messageStyles = ({ palette }: Theme) =>
   createStyles({
     card: {
-      paddingBottom: '20px',
+      paddingTop: '10px',
+      paddingBottom: '10px',
       display: 'flex',
       flexShrink: 0,
       flexDirection: (props: StyleProp) => (props.isThisUser ? 'row-reverse' : 'row'),
@@ -43,5 +44,6 @@ export const messageStyles = ({ palette }: Theme) =>
       textTransform: 'uppercase',
       marginBottom: '5px',
       fontWeight: 600,
+      whiteSpace: 'nowrap',
     },
   });

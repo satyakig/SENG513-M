@@ -17,7 +17,7 @@ export const headerStyle = () =>
   createStyles({
     appBar: {
       display: 'flex',
-      border: '0',
+      border: 0,
       borderRadius: '3px',
       padding: '0.625rem 0',
       color: '#555',

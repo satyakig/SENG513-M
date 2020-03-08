@@ -14,14 +14,17 @@ export const chatStyles = () =>
         '0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)',
     },
     layer: {
+      display: 'flex',
+      flexDirection: 'column-reverse',
       height: 'calc(100vh - 70px - 97px)',
       overflowY: 'auto',
     },
     messages: {
+      minHeight: 0,
+      position: 'relative',
       display: 'flex',
       flexDirection: 'column-reverse',
       padding: '0 15px',
-      margin: '15px 0',
     },
     textRow: {
       minHeight: `${rowHeight}`,

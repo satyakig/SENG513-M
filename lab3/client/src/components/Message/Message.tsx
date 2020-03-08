@@ -21,7 +21,7 @@ const Message = (props: MessageProps) => {
   });
 
   function formatDate(inp: number): string {
-    return moment(inp).format('h:mma MMM D, YYYY');
+    return moment(inp).format('h:mm:ssa MMM D, YYYY');
   }
 
   return (

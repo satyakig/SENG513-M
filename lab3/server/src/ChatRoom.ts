@@ -186,6 +186,11 @@ export class ChatRoom {
     return [...this.MESSAGES.values()];
   }
 
+  reset(): void {
+    this.USERS = new Map();
+    this.MESSAGES = new Map();
+  }
+
   static getInstance(): ChatRoom {
     if (ChatRoom.instance === undefined) {
       ChatRoom.instance = new ChatRoom();

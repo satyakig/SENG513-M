@@ -13,6 +13,11 @@ app.use(cors());
 const httpServer = new Server(app);
 const io = socketIo(httpServer);
 
+app.get('/reset', (req, res) => {
+  ChatRoom.getInstance().reset();
+  return res.send('Done');
+});
+
 io.on('connection', (socket) => {
   const instance = ChatRoom.getInstance();
   let user: User;
@@ -112,6 +117,7 @@ io.on('connection', (socket) => {
   });
 });
 
+// Startup Server
 const PORT = process.env.PORT || 3001;
 httpServer.listen(PORT, () => {
   ChatRoom.getInstance();

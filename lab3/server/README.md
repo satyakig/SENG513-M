@@ -3,7 +3,6 @@
 - ASSIGNMENT: 3
 - TUTORIAL: B02
 - NAME: Satyaki Ghosh
-- ID: 10077685
 - URL: https://seng513-c2526.appspot.com
 - NodeJS Server
 
